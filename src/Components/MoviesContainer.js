@@ -7,10 +7,15 @@ const MoviesContainer = ( {movieData} ) => {
     return (
             <Movie 
                 key={movie.id}
+                id={movie.id}
+                averageRating={movie.average_rating}
+                releaseDate={movie.release_date}
+                backdropPath={movie.backdrop_path}
                 posterPath={movie.poster_path}
                 title={movie.title}
+
+
                 />
-        
     )
   })
   return (
