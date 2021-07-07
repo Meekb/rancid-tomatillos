@@ -1,10 +1,12 @@
 import React from 'react';
+import './Movie.css'
 
 const Movie = ( {title, posterPath} ) => {
     return (
         <section>
-            <p> {title} </p>
             <img src={posterPath}/>
+            <p> {title} </p>
+            {/* <p>I am movie hear me roar</p> */}
         </section>
     )
 }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import './App.css';
 import movieData from '../Data/data';
+import MoviesContainer from "./MoviesContainer";
 
 class App extends Component {
   constructor() {
@@ -12,7 +13,10 @@ class App extends Component {
 
   render() {
     return (
-      <h1>Putrid Physalis Philadelphica</h1>
+      <main>
+        <h1>Putrid Physalis Philadelphica</h1>
+        <MoviesContainer movieData={this.state.movies}/>
+      </main>
     );
   }
 
