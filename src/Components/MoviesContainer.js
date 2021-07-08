@@ -3,7 +3,7 @@ import Movie from './Movie';
 import Poster from './Poster';
 import './MoviesContainer.css';
 
-const MoviesContainer = ( {movieData} ) => {
+const MoviesContainer = ( {movieData, handleClick} ) => {
     const allMovies = movieData.map(movie => {
     return (
             <Movie 
@@ -14,8 +14,8 @@ const MoviesContainer = ( {movieData} ) => {
                 backdropPath={movie.backdrop_path}
                 posterPath={movie.poster_path}
                 title={movie.title}
-
-
+                displayMovie={handleClick}
+                
                 />
     )
   })
