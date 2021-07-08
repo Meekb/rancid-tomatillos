@@ -19,11 +19,11 @@ const MoviesContainer = ( {movieData, displayClickedMovie} ) => {
                 />
     )
   });
-  
+
   return (
       <section className='all-movies'> 
           {allMovies}
-          <Poster movieData={movieData}/> 
+          <Poster movieData={movieData} displayMovie={displayClickedMovie}/> 
       </section>
   )
  

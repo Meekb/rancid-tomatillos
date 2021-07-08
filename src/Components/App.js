@@ -8,19 +8,20 @@ class App extends Component {
     super();
     this.state = {
       movies: movieData.movies,
-      newMovie: null
+      moviePoster: null
     }
   }
 
   displayClickedMovie = (event) => {
+    event.preventDefault();
     const movieId = event.target.id;
 
     const movieMatch = this.state.movies.filter(movie => {
       return (movie.id === parseInt(movieId)); 
     });
     
-    this.setState({ newMovie: movieMatch });
-    console.log('state:', this.state.newMovie)
+    this.setState({ displayedMovie: movieMatch });
+    console.log('state:', this.state.displayedMovie)
   }
 
   render() {
