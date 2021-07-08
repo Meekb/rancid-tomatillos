@@ -3,15 +3,15 @@ import singleMovie from '../Data/singleMovie';
 import './Poster.css';
 
 class Poster extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      singleMovie: singleMovie.movie
+      clickedMovie: singleMovie.movie
     }
   }
 
   render() {
-    const info = this.state.singleMovie
+    const info = this.state.clickedMovie
     return (
       <section className='poster'>
         <h2>{info.title}</h2>

@@ -12,20 +12,25 @@ class App extends Component {
     }
   }
 
-  handleClick = (event) => {
-    event.preventDefault();
-    console.log('YOU CLICKED A MOVIE')
-    // let movieId = parseInt(event.target.id);
-    // let movieMatch= this.state.movies.find(movie => movie.id === movieId);
-    // this.setState({ newMovie: movieMatch });
-    // console.log('state:', this.state.newMovie)
+  displayClickedMovie = (event) => {
+    const movieId = event.target.id;
+
+    const movieMatch = this.state.movies.filter(movie => {
+      return (movie.id === parseInt(movieId)); 
+    });
+    
+    this.setState({ newMovie: movieMatch });
+    console.log('state:', this.state.newMovie)
   }
 
   render() {
+    if (!this.state.movies.length) {
+      return <p>Loading movies...</p>
+    }
     return (
       <main className="home">
         <h1>Putrid Physalis Philadelphica</h1>
-        <MoviesContainer movieData={this.state.movies} handleClick={this.handleClick}/>
+        <MoviesContainer movieData={this.state.movies} displayClickedMovie={this.displayClickedMovie}/>
       </main>
     );
   }
