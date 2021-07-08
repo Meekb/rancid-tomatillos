@@ -3,3 +3,12 @@ h1 {
   color: #4cd0a4;
 }
 
+.home {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+

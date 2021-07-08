@@ -1,3 +1,18 @@
 img {
-max-width: 25%;
+max-width: 50%;
+}
+
+.each-movie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.zoom {
+    transition: all .2s ease-in-out;
+}
+
+.zoom:hover {
+    transform: scale(1.15);
 }
