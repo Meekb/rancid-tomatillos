@@ -1,5 +1,6 @@
 import React from 'react';
 import Movie from './Movie';
+import Poster from './Poster';
 import './MoviesContainer.css';
 
 const MoviesContainer = ( {movieData} ) => {
@@ -20,7 +21,8 @@ const MoviesContainer = ( {movieData} ) => {
   })
   return (
       <section className='all-movies'> 
-          {allMovies} 
+          {allMovies}
+          <Poster movieData={movieData}/> 
       </section>
   )
  
