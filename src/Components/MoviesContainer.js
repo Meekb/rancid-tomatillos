@@ -1,5 +1,6 @@
 import React from 'react';
 import Movie from './Movie';
+import PropTypes from 'prop-types';
 import './MoviesContainer.css';
 
 const MoviesContainer = ( {movieData} ) => {
@@ -25,5 +26,9 @@ const MoviesContainer = ( {movieData} ) => {
   )
  
 }
+
+MoviesContainer.propTypes = {
+    movieData: PropTypes.array
+};
 
 export default MoviesContainer

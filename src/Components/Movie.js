@@ -15,7 +15,7 @@ const Movie = ( {title, posterPath} ) => {
 
 export default Movie
 
-Movie.PropTypes = {
+Movie.propTypes = {
     title: PropTypes.string,
     posterPath: PropTypes.string
 };
