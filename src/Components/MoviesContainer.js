@@ -1,6 +1,7 @@
 import React from 'react';
 import Movie from './Movie';
 import Poster from './Poster';
+import PropTypes from 'prop-types';
 import './MoviesContainer.css';
 
 const MoviesContainer = ( {movieData, displayClickedMovie} ) => {
@@ -29,4 +30,9 @@ const MoviesContainer = ( {movieData, displayClickedMovie} ) => {
  
 }
 
-export default MoviesContainer;
+
+export default MoviesContainer
+
+MoviesContainer.propTypes = {
+    movieData: PropTypes.array
+};

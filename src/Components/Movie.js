@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Movie.css'
 
 const Movie = ( {id, title, posterPath, displayMovie} ) => {
@@ -12,4 +13,9 @@ const Movie = ( {id, title, posterPath, displayMovie} ) => {
 
 }
 
-export default Movie;
+export default Movie
+
+Movie.propTypes = {
+    title: PropTypes.string,
+    posterPath: PropTypes.string
+};
