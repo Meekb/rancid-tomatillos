@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import './App.css';
-import movieData from '../Data/data';
 import MoviesContainer from "./MoviesContainer";
+import PropTypes from 'prop-types';
+import movieData from '../Data/data';
+import './App.css';
 
 class App extends Component {
   constructor() {
@@ -39,3 +40,8 @@ class App extends Component {
 }
 
 export default App;
+
+App.propTypes = {
+  movies: PropTypes.object,
+  moviePoster: PropTypes.object || null,
+}
