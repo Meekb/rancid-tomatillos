@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Movie.css'
 
-const Movie = ( {id, title, posterPath, displayMovie} ) => {
+const Movie = ( {id, title, posterPath, handleClick} ) => {
     return (
         <section className='each-movie' >
-            <img src={posterPath} className='zoom' alt={title} id={id} onClick={(e) => displayMovie(e)} />
+            <img src={posterPath} className='zoom' alt={title} id={id} onClick={(e) => handleClick(e)} />
             <p> {title} </p>
             {/* <p>I am movie hear me roar</p> */}  
         </section>
