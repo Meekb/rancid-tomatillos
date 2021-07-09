@@ -1,9 +1,10 @@
 import React from 'react';
 import Movie from './Movie';
+import Poster from './Poster';
 import PropTypes from 'prop-types';
 import './MoviesContainer.css';
 
-const MoviesContainer = ( {movieData} ) => {
+const MoviesContainer = ( {movieData, displayClickedMovie} ) => {
     const allMovies = movieData.map(movie => {
     return (
             <Movie 
@@ -14,21 +15,24 @@ const MoviesContainer = ( {movieData} ) => {
                 backdropPath={movie.backdrop_path}
                 posterPath={movie.poster_path}
                 title={movie.title}
-
-
+                displayMovie={displayClickedMovie}
+                
                 />
     )
-  })
+  });
+
   return (
       <section className='all-movies'> 
-          {allMovies} 
+          {allMovies}
+          <Poster movieData={movieData} displayMovie={displayClickedMovie}/> 
       </section>
   )
  
 }
 
+
+export default MoviesContainer
+
 MoviesContainer.propTypes = {
     movieData: PropTypes.array
 };
-
-export default MoviesContainer
