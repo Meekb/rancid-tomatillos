@@ -22,6 +22,7 @@ class Poster extends Component {
         <p>Runtime: {info.revenue}</p>
         <p>Budget: {info.budget}</p>
         <p>Revenue: {info.revenue}</p>
+        <button className='back-btn'>Back To Search</button>
       </section>
     );
   }
