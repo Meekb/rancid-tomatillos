@@ -1,3 +1,10 @@
 .poster {
-  background-color: #4cd0a4;
+  color: black;
+  height: 100vh;
+  text-align: center;
 }
+
+.poster-title {
+  font-size: 55px;
+}
+

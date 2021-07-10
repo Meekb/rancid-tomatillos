@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import MoviesContainer from "./MoviesContainer";
-import Poster from './Poster'
 import Header from './Header'
 import PropTypes from 'prop-types';
 import movieData from '../Data/data';
@@ -11,41 +10,50 @@ class App extends Component {
     super();
     this.state = {
       movies: movieData.movies,
-      moviePoster: false
+      moviePoster: false,
+      details: []
     }
   }
 
-  // componentDidMount() {
-  //   this.setState({moviePoster: false});
-  // }
-
-  handleClick = (event) => {
+  displayPoster = (event) => {
     event.preventDefault(); 
     const movieId = event.target.id;
-    this.state.movies.filter(movie => {
+    const movieToDisplay = this.state.movies.filter(movie => {
       return (movie.id === parseInt(movieId));  
     });
     let display = true;
-    this.setState({ moviePoster: display });
+    this.setState({ moviePoster: display, details: movieToDisplay });
   }
 
-  // write Poster component
-  // write conditional in App render to display one or the other
-  // depending on the value of this.state.moviePoster
+  closePoster = (event) => {
+    let noDisplay = false;
+    this.setState({ moviePoster: noDisplay, details: [] });
+  }
+
+  //may need this - sample data ratings need to be formatted 
+  formatRating = (rating) => {
+    rating = rating.toFixed(2);
+    return rating
+  }
+
+  formatReleaseDate = (date) => {
+    console.log(date);
+    const month = date.split('-')[1];
+    const day = date.split('-')[2];
+    const year = date.split('-')[0];
+    const formattedDate = `${month}-${day}-${year}`;
+    return formattedDate;
+  }
 
   render() {
     if (!this.state.movies.length) {
       return <p>Loading movies...</p>
     }
 
-    if (this.state.moviePoster) {
-      return <Poster />
-    }
-
     return (
       <main className="home">
         < Header />
-        <MoviesContainer movieData={this.state.movies} handleClick={this.handleClick} />
+        <MoviesContainer movieData={this.state.movies} displayPoster={this.displayPoster} moviePoster={this.state.moviePoster} details={this.state.details} formatRating={this.formatRating} formatReleaseDate={this.formatReleaseDate} closePoster={this.closePoster} />
       </main>
     );
   }
