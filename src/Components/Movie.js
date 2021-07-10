@@ -6,8 +6,7 @@ const Movie = ( {id, title, posterPath, handleClick} ) => {
     return (
         <section className='each-movie' >
             <img src={posterPath} className='zoom' alt={title} id={id} onClick={(e) => handleClick(e)} />
-            <p> {title} </p>
-            {/* <p>I am movie hear me roar</p> */}  
+            <h2>{title}</h2>
         </section>
     )
 

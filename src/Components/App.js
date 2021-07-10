@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MoviesContainer from "./MoviesContainer";
-import Poster from './Poster'
+// import Poster from './Poster'
 import PropTypes from 'prop-types';
 import movieData from '../Data/data';
 import './App.css';
@@ -10,7 +10,8 @@ class App extends Component {
     super();
     this.state = {
       movies: movieData.movies,
-      moviePoster: false
+      moviePoster: false,
+      details: []
     }
   }
 
@@ -21,11 +22,11 @@ class App extends Component {
   handleClick = (event) => {
     event.preventDefault(); 
     const movieId = event.target.id;
-    this.state.movies.filter(movie => {
+    const movieToDisplay = this.state.movies.filter(movie => {
       return (movie.id === parseInt(movieId));  
     });
     let display = true;
-    this.setState({ moviePoster: display });
+    this.setState({ moviePoster: display, details: movieToDisplay });
   }
 
   // write Poster component
@@ -37,14 +38,10 @@ class App extends Component {
       return <p>Loading movies...</p>
     }
 
-    if (this.state.moviePoster) {
-      return <Poster />
-    }
-
     return (
       <main className="home">
         <h1>Putrid Physalis Philadelphica</h1>
-        <MoviesContainer movieData={this.state.movies} handleClick={this.handleClick} />
+        <MoviesContainer movieData={this.state.movies} handleClick={this.handleClick} moviePoster={this.state.moviePoster} details={this.state.details} />
       </main>
     );
   }
