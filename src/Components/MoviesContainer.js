@@ -4,7 +4,7 @@ import Poster from './Poster';
 import PropTypes from 'prop-types';
 import './MoviesContainer.css';
 
-const MoviesContainer = ( {movieData, moviePoster, details, handleClick} ) => {
+const MoviesContainer = ( {movieData, moviePoster, details, handleClick, formatRating, formatReleaseDate} ) => {
     const allMovies = movieData.map(movie => {
     return (
         <Movie 
@@ -37,6 +37,8 @@ const MoviesContainer = ( {movieData, moviePoster, details, handleClick} ) => {
             revenue={info.revenue}
             runtime={info.runtime}
             tagline={info.tagline}
+            formatRating={formatRating}
+            formatReleaseDate={formatReleaseDate}
           />
   }
   return (

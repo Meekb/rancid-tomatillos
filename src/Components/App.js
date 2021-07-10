@@ -25,6 +25,21 @@ class App extends Component {
     this.setState({ moviePoster: display, details: movieToDisplay });
   }
 
+  //may need this - sample data ratings need to be formatted 
+  formatRating = (rating) => {
+    rating = rating.toFixed(2);
+    return rating
+  }
+
+  formatReleaseDate = (date) => {
+    console.log(date);
+    const month = date.split('-')[1];
+    const day = date.split('-')[2];
+    const year = date.split('-')[0];
+    const formattedDate = `${month}-${day}-${year}`;
+    return formattedDate;
+  }
+
   render() {
     if (!this.state.movies.length) {
       return <p>Loading movies...</p>
@@ -33,7 +48,7 @@ class App extends Component {
     return (
       <main className="home">
         <h1>Putrid Physalis Philadelphica</h1>
-        <MoviesContainer movieData={this.state.movies} handleClick={this.handleClick} moviePoster={this.state.moviePoster} details={this.state.details} />
+        <MoviesContainer movieData={this.state.movies} handleClick={this.handleClick} moviePoster={this.state.moviePoster} details={this.state.details} formatRating={this.formatRating} formatReleaseDate={this.formatReleaseDate} />
       </main>
     );
   }

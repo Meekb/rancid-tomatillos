@@ -1,12 +1,7 @@
 import React from 'react';
 import './Poster.css';
 
-const Poster = ( {id, title, posterPath, backdropPath, releaseDate, overview, averageRating, genres, budget, revenue, runtime, tagline} ) => {
-
-  // const backdrop = {
-  //   backgroundImage: 'url({backdropPath}) no-repeat',
-  //   backgroundSize: 'cover',
-  // }
+const Poster = ( {id, title, posterPath, backdropPath, releaseDate, overview, averageRating, genres, budget, revenue, runtime, tagline, formatRating, formatReleaseDate} ) => {
 
   return (
     <section className='poster' style={{
@@ -18,8 +13,8 @@ const Poster = ( {id, title, posterPath, backdropPath, releaseDate, overview, av
       <h2>{title}</h2>
       <h3>{tagline}</h3>
       <p>{genres}</p>
-      <p>Rated {averageRating} PP's</p>
-      <p>Released {releaseDate}</p>
+      <p>Rated {formatRating(averageRating)} PP's</p>
+      <p>Released {formatReleaseDate(releaseDate)}</p>
       <p>{overview}</p>
       <p>Runtime: {revenue}</p>
       <p>Budget: {budget}</p>
