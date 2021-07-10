@@ -11,7 +11,7 @@ class App extends Component {
     super();
     this.state = {
       movies: movieData.movies,
-      moviePoster: null,
+      moviePoster: false,
       details: null,
       error: false
     }
@@ -40,7 +40,6 @@ class App extends Component {
     .then(data => data.json())
     .then(
       (singleMovie) => {
-        console.log(singleMovie)
         this.setState({
           moviePoster: true,
           details: singleMovie.movie
@@ -48,12 +47,13 @@ class App extends Component {
       }
     )
     .catch(() => this.setState({ error: 'Something went wrong'}));    
-    return movieToDisplay
+    // return movieToDisplay
   }
 
   closePoster = (event) => {
     event.preventDefault();
     this.setState({ moviePoster: false, details: [] });
+    console.log('CLICKED');
   }
 
   //may need this - sample data ratings need to be formatted 
@@ -73,13 +73,13 @@ class App extends Component {
 
   render() {
 
-    if (this.state.details) {
+    if (this.state.moviePoster) {
       return (
         <main>
+
           < Header />
-          <section className='movie-area'>
-            <Poster details={this.state.details} closePoster={this.closePoster}/>}
-          </section>
+          <Poster details={this.state.details} closePoster={this.closePoster}/>}
+
         </main>
       );
     }
@@ -88,9 +88,7 @@ class App extends Component {
       <main className="home">
 
         < Header />
-        <section className='library'>
-          <MoviesContainer movieData={this.state.movies} displayPoster={this.displayPoster} moviePoster={this.state.moviePoster} details={this.state.details} formatRating={this.formatRating} formatReleaseDate={this.formatReleaseDate} closePoster={this.closePoster} />
-        </section>
+        <MoviesContainer movieData={this.state.movies} displayPoster={this.displayPoster} moviePoster={this.state.moviePoster} details={this.state.details} formatRating={this.formatRating} formatReleaseDate={this.formatReleaseDate} closePoster={this.closePoster} />
         
       </main>
     );

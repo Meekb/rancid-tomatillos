@@ -24,7 +24,7 @@ const Poster = ( {details, closePoster, formatRating, formatReleaseDate} ) => {
       <p>Runtime: {details.runtime} minutes </p>
       <p>Budget: {details.budget}</p>
       <p>Revenue: {details.revenue}</p>
-      <button className='back-btn' onClick={closePoster} >Back To Search</button>
+      <button aria-label='Back To Search' className='back-btn' onClick={closePoster} >Back To Search</button>
       </div>  
     </section>
   );  
