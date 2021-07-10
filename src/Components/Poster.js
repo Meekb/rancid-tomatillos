@@ -10,6 +10,7 @@ const Poster = ( {id, title, posterPath, backdropPath, releaseDate, overview, av
       size: 'cover'
     }}>
       {/* <img src={backdropPath} className='backdrop' alt={title} id={id}/> */}
+      <div className='poster-container'>
       <h2 className='poster-title'>{title}</h2>
       <h3>{tagline}</h3>
       <p>{genres}</p>
@@ -20,6 +21,7 @@ const Poster = ( {id, title, posterPath, backdropPath, releaseDate, overview, av
       <p>Budget: {budget}</p>
       <p>Revenue: {revenue}</p>
       <button className='back-btn' onClick={closePoster} >Back To Search</button>
+      </div>
     </section>
   );  
 }
