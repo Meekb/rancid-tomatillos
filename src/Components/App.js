@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MoviesContainer from "./MoviesContainer";
-// import Poster from './Poster'
+import Header from './Header'
 import PropTypes from 'prop-types';
 import movieData from '../Data/data';
 import './App.css';
@@ -52,7 +52,7 @@ class App extends Component {
 
     return (
       <main className="home">
-        <h1>Putrid Physalis Philadelphica</h1>
+        < Header />
         <MoviesContainer movieData={this.state.movies} displayPoster={this.displayPoster} moviePoster={this.state.moviePoster} details={this.state.details} formatRating={this.formatRating} formatReleaseDate={this.formatReleaseDate} closePoster={this.closePoster} />
       </main>
     );
