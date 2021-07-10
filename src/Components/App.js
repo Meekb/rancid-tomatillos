@@ -3,7 +3,7 @@ import MoviesContainer from "./MoviesContainer";
 import Header from './Header'
 import PropTypes from 'prop-types';
 // import movieData from '../Data/data';
-import apiCalls from './api.js'
+//import apiCalls from './api.js'
 import './App.css';
 
 class App extends Component {
@@ -17,37 +17,30 @@ class App extends Component {
     }
   }
 
-
-  componentDidMount = () => {
-    const allMoviesUrl = 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/'
-    
-
-    const getAllMovies = () => {
-      fetch(allMoviesUrl)
-      .then(this.checkIfError)
+  componentDidMount() {
+      fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies/')
+      .then(data => data.json())
       .then(data => this.setState({movies: data}))
       .catch(error => console.log('Oops! Something went wrong:', error))
   }
 
-  const checkIfError = (response) => {
+  // const getOneMovie = (id) => {
+  //   let oneMovieUrl = `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`;
+  //   fetch(oneMovieUrl)
+  //   .then(response => response.json)
+  //   .then(data => this.setState({details: data}))
+  // }
+  
+  // }
+
+  checkIfError(response) {
     if(response.ok) {
       const currentStatus = response.status
       this.setState({ error: true })
       throw new Error(`Uh oh, something went wrong, better luck next time. Error: ${currentStatus}`)
-  } else {
-      return response.json()
   }
 
 }
-
-  const getOneMovie = (id) => {
-    let oneMovieUrl = `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`;
-    fetch(oneMovieUrl)
-    .then(response => response.json)
-    .then(data => this.setState({details: data}))
-  }
-
-  }
 
   displayPoster = (event) => {
     event.preventDefault(); 
