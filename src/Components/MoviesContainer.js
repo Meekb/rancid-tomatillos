@@ -27,10 +27,16 @@ const MoviesContainer = ( {movieData, moviePoster, details, handleClick} ) => {
             key={info.id}
             id={info.id}
             title={info.title}
-            averageRating={info.average_rating}
-            releaseDate={info.release_date}
-            backdropPath={info.backdrop_path}
             posterPath={info.poster_path}
+            backdropPath={info.backdrop_path}
+            releaseDate={info.release_date}
+            overview={info.overview}
+            averageRating={info.average_rating}
+            genres={info.genres}
+            budget={info.budget}
+            revenue={info.revenue}
+            runtime={info.runtime}
+            tagline={info.tagline}
           />
   }
   return (

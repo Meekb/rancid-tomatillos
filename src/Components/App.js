@@ -15,10 +15,6 @@ class App extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   this.setState({moviePoster: false});
-  // }
-
   handleClick = (event) => {
     event.preventDefault(); 
     const movieId = event.target.id;
@@ -28,10 +24,6 @@ class App extends Component {
     let display = true;
     this.setState({ moviePoster: display, details: movieToDisplay });
   }
-
-  // write Poster component
-  // write conditional in App render to display one or the other
-  // depending on the value of this.state.moviePoster
 
   render() {
     if (!this.state.movies.length) {
