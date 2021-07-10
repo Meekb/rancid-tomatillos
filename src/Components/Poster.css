@@ -1,7 +1,16 @@
 .poster {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: black;
   height: 100vh;
   text-align: center;
+}
+
+.poster-container {
+  width: 55%;
+  background-color: #7d7777;
+  opacity: 80%;
 }
 
 .poster-title {
