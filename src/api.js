@@ -3,21 +3,22 @@ const apiCalls = () => {
 const allMoviesUrl = 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/'
 const oneMovieUrl = `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`
 
-function getAllMovies() {
-    fetch(allMoviesUrl)
-    .then(this.checkIfError)
-    .then(data => this.setState({movies: data}))
-    .catch(error => console.log('Oops! Something went wrong:', error))
-}
+// function getAllMovies() {
+//     fetch(allMoviesUrl)
+//     .then(this.checkIfError)
+//     .then(data => this.setState({movies: data}))
+//     .catch(error => console.log('Oops! Something went wrong:', error))
+// }
 
-function checkIfError(response) {
-    if(response.ok) {
-        const currentStatus = response.status
-        this.setState({ error: true })
-        throw new Error(`Uh oh, something went wrong, better luck next time. Error: ${currentStatus}`)
-    } else {
-        return response.json()
-    }
+// function checkIfError(response) {
+//     if(response.ok) {
+//         const currentStatus = response.status
+//         this.setState({ error: true })
+//         throw new Error(`Uh oh, something went wrong, better luck next time. Error: ${currentStatus}`)
+//     } else {
+//         return response.json()
+//     }
+
 function getOneMovie(id) {
     fetch(oneMovieUrl)
         .then(response => response.json)
@@ -31,4 +32,5 @@ function getOneMovie(id) {
 
 
 
-export default apiCalls
+export default apiCalls;
+

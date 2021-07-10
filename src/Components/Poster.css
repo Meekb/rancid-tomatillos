@@ -1,6 +1,6 @@
 .poster {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   color: black;
   height: 100vh;
@@ -12,6 +12,11 @@
   height: 75%;
   background-color: #7d7777;
   opacity: 80%;
+}
+
+.cover-image {
+  width: 400px;
+  box-shadow: 8px 8px 2px 2px #77c374;
 }
 
 .poster-title {

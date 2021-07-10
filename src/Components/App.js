@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MoviesContainer from "./MoviesContainer";
 import Header from './Header'
+import Poster from './Poster';
 import PropTypes from 'prop-types';
 import movieData from '../Data/data';
 import './App.css';
@@ -10,10 +11,24 @@ class App extends Component {
     super();
     this.state = {
       movies: movieData.movies,
-      moviePoster: false,
-      details: []
+      moviePoster: null,
+      details: null,
+      error: false
     }
   }
+
+  componentDidMount() {
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/`)
+    .then(data => data.json())
+    .then(
+      (moviesData) => {
+        this.setState({
+          movies: moviesData.movies
+      });
+    },
+  )
+  .catch(() => this.setState({ error: 'Something went wrong'}));
+}
 
   displayPoster = (event) => {
     event.preventDefault(); 
@@ -21,13 +36,24 @@ class App extends Component {
     const movieToDisplay = this.state.movies.filter(movie => {
       return (movie.id === parseInt(movieId));  
     });
-    let display = true;
-    this.setState({ moviePoster: display, details: movieToDisplay });
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
+    .then(data => data.json())
+    .then(
+      (singleMovie) => {
+        console.log(singleMovie)
+        this.setState({
+          moviePoster: true,
+          details: singleMovie.movie
+        })
+      }
+    )
+    .catch(() => this.setState({ error: 'Something went wrong'}));    
+    return movieToDisplay
   }
 
   closePoster = (event) => {
-    let noDisplay = false;
-    this.setState({ moviePoster: noDisplay, details: [] });
+    event.preventDefault();
+    this.setState({ moviePoster: false, details: [] });
   }
 
   //may need this - sample data ratings need to be formatted 
@@ -46,18 +72,31 @@ class App extends Component {
   }
 
   render() {
-    if (!this.state.movies.length) {
-      return <p>Loading movies...</p>
-    }
 
+    if (this.state.details) {
+      return (
+        <main>
+          < Header />
+          <section className='movie-area'>
+            <Poster details={this.state.details} closePoster={this.closePoster}/>}
+          </section>
+        </main>
+      );
+    }
+    
     return (
       <main className="home">
+
         < Header />
-        <MoviesContainer movieData={this.state.movies} displayPoster={this.displayPoster} moviePoster={this.state.moviePoster} details={this.state.details} formatRating={this.formatRating} formatReleaseDate={this.formatReleaseDate} closePoster={this.closePoster} />
+        <section className='library'>
+          <MoviesContainer movieData={this.state.movies} displayPoster={this.displayPoster} moviePoster={this.state.moviePoster} details={this.state.details} formatRating={this.formatRating} formatReleaseDate={this.formatReleaseDate} closePoster={this.closePoster} />
+        </section>
+        
       </main>
     );
-  }
 
+  }
+  
 }
 
 export default App;
@@ -65,4 +104,31 @@ export default App;
 App.propTypes = {
   movies: PropTypes.object,
   moviePoster: PropTypes.bool
+  
+  
+  // if (!!this.state.movies.length) {
+  //   return <p>Loading movies...</p>
+  // }
+  // if (!!this.state.moviePoster) {
+  //   console.log(this.state.details);
+  //   return <Poster 
+  //             details={this.state.details}
+  //           //  key={details.id}
+  //           //  id={details.id}
+  //           //  title={details.title}
+  //           //  posterPath={details.poster_path}
+  //           //  backdropPath={details.backdrop_path}
+  //           //  releaseDate={details.release_date}
+  //           //  overview={details.overview}
+  //           //  averageRating={details.average_rating}
+  //           //  genres={details.genres}
+  //           //  budget={details.budget}
+  //           //  revenue={details.revenue}
+  //           //  runtime={details.runtime}
+  //           //  tagline={details.tagline}
+  //           //  formatRating={formatRating}
+  //           //  formatReleaseDate={formatReleaseDate}
+  //           //  closePoster={closePoster}
+  //           />
+  // }
 }

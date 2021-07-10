@@ -1,27 +1,31 @@
 import React from 'react';
 import './Poster.css';
 
-const Poster = ( {id, title, posterPath, backdropPath, releaseDate, overview, averageRating, genres, budget, revenue, runtime, tagline, closePoster, formatRating, formatReleaseDate} ) => {
-
+const Poster = ( {details, closePoster, formatRating, formatReleaseDate} ) => {
+  let rating = details.average_rating;
+  let releaseDate = details.release_date;
   return (
-    <section className='poster' style={{
-      backgroundImage: `url(${backdropPath})`,
+    <section   
+      className='poster' style={{
+      backgroundImage: `url(${details.backdrop_path})`,
       backgroundRepeat: 'no-repeat',
       size: 'cover'
     }}>
-      {/* <img src={backdropPath} className='backdrop' alt={title} id={id}/> */}
+
+      <img src={details.poster_path} className='cover-image' alt={details.title} id={details.id}/>
+
       <div className='poster-container'>
-      <h2 className='poster-title'>{title}</h2>
-      <h3>{tagline}</h3>
-      <p>{genres}</p>
-      <p>Rated {formatRating(averageRating)} PP's</p>
-      <p>Released {formatReleaseDate(releaseDate)}</p>
-      <p>{overview}</p>
-      <p>Runtime: {revenue}</p>
-      <p>Budget: {budget}</p>
-      <p>Revenue: {revenue}</p>
+      <h2 className='poster-title'> {details.title} </h2>
+      <h3> {details.tagline} </h3>
+      {/* <p>{genres}</p> */}
+      {/* <p>Rated {formatRating(rating)} PP's</p> */}
+      {/* <p>Released {formatReleaseDate(releaseDate)}</p> */}
+      <p>{details.overview}</p>
+      <p>Runtime: {details.runtime} minutes </p>
+      <p>Budget: {details.budget}</p>
+      <p>Revenue: {details.revenue}</p>
       <button className='back-btn' onClick={closePoster} >Back To Search</button>
-      </div>
+      </div>  
     </section>
   );  
 }
