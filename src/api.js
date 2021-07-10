@@ -31,4 +31,4 @@ function getOneMovie(id) {
 
 
 
-export default apiCalls
+export default apiCalls 
