@@ -15,7 +15,7 @@ class App extends Component {
     }
   }
 
-  handleClick = (event) => {
+  displayPoster = (event) => {
     event.preventDefault(); 
     const movieId = event.target.id;
     const movieToDisplay = this.state.movies.filter(movie => {
@@ -23,6 +23,11 @@ class App extends Component {
     });
     let display = true;
     this.setState({ moviePoster: display, details: movieToDisplay });
+  }
+
+  closePoster = (event) => {
+    let noDisplay = false;
+    this.setState({ moviePoster: noDisplay, details: [] });
   }
 
   //may need this - sample data ratings need to be formatted 
@@ -48,7 +53,7 @@ class App extends Component {
     return (
       <main className="home">
         <h1>Putrid Physalis Philadelphica</h1>
-        <MoviesContainer movieData={this.state.movies} handleClick={this.handleClick} moviePoster={this.state.moviePoster} details={this.state.details} formatRating={this.formatRating} formatReleaseDate={this.formatReleaseDate} />
+        <MoviesContainer movieData={this.state.movies} displayPoster={this.displayPoster} moviePoster={this.state.moviePoster} details={this.state.details} formatRating={this.formatRating} formatReleaseDate={this.formatReleaseDate} closePoster={this.closePoster} />
       </main>
     );
   }
