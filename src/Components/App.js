@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MoviesContainer from "./MoviesContainer";
-import Header from './Header'
+import Header from './Header';
+import Poster from './Poster';
 import PropTypes from 'prop-types';
 // import movieData from '../Data/data';
 //import apiCalls from './api.js'
@@ -13,26 +14,19 @@ class App extends Component {
       movies: [],
       // movies: movieData.movies,
       moviePoster: false,
-      details: []
+      details: null,
+      error: false
     }
   }
 
   componentDidMount() {
-      fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies/')
-      .then(data => data.json())
-      .then(data => this.setState({movies: data}))
-      .catch(error => console.log('Oops! Something went wrong:', error))
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/`)
+    .then(data => data.json())
+    .then((moviesData) => {this.setState({movies: moviesData.movies})})
+  .catch(() => this.setState({ error: 'Something went wrong'}));
   }
 
-  // const getOneMovie = (id) => {
-  //   let oneMovieUrl = `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`;
-  //   fetch(oneMovieUrl)
-  //   .then(response => response.json)
-  //   .then(data => this.setState({details: data}))
-  // }
   
-  // }
-
   checkIfError(response) {
     if(response.ok) {
       const currentStatus = response.status
@@ -42,15 +36,31 @@ class App extends Component {
 
 }
 
-  displayPoster = (event) => {
-    event.preventDefault(); 
-    const movieId = event.target.id;
-    const movieToDisplay = this.state.movies.filter(movie => {
-      return (movie.id === parseInt(movieId));  
-    });
-    let display = true;
-    this.setState({ moviePoster: display, details: movieToDisplay });
-  }
+displayPoster = event => {
+  event.preventDefault()
+  fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
+  .then(response => response.json())
+  .then(data => this.setState({details: data, moviePoster: true}))
+} 
+ 
+
+  // componentDidUpdate(movieId) {
+  //   fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
+  //   .then(response => response.json)
+  //   .then(data => this.setState({details: data.movie, moviePoster: true}))
+  // }
+
+  // displayPoster = (event) => {
+  //   event.preventDefault(); 
+  //   const movieId = event.target.id;
+  //   const movieToDisplay = this.state.movies.filter(movie => {
+  //     return (movie.id === parseInt(movieId));  
+  //   });
+
+  //   this.componentDidUpdate(movieId)
+  //   // let display = true;
+  //   // this.setState({ moviePoster: display, details: movieToDisplay });
+  // }
 
   closePoster = (event) => {
     let noDisplay = false;
@@ -76,13 +86,13 @@ class App extends Component {
     if (!this.state.movies.length) {
       return <p>Loading movies...</p>
     }
-
     return (
       <main className="home">
         < Header />
         <MoviesContainer movieData={this.state.movies} displayPoster={this.displayPoster} moviePoster={this.state.moviePoster} details={this.state.details} formatRating={this.formatRating} formatReleaseDate={this.formatReleaseDate} closePoster={this.closePoster} />
       </main>
     );
+    
   }
 
 }
