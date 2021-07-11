@@ -37,10 +37,15 @@ class App extends Component {
 }
 
 displayPoster = event => {
-  event.preventDefault()
-  fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
-  .then(response => response.json())
-  .then(data => this.setState({details: data, moviePoster: true}))
+  event.preventDefault();
+  const movieId = event.target.id;
+  const movieToDisplay = this.state.movies.filter(movie => {
+    return (movie.id == parseInt(movieId))
+  })
+  fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
+  .then(data => data.json())
+  .then(singleMovie => this.setState({details: singleMovie.movie, moviePoster: true}))
+  .catch(() => this.setState({ error: 'Something went wrong'}))
 } 
  
 
