@@ -1,34 +1,63 @@
 import React, { Component } from "react";
 import MoviesContainer from "./MoviesContainer";
-import Header from './Header'
+import Header from './Header';
+import Poster from './Poster';
 import PropTypes from 'prop-types';
-import movieData from '../Data/data';
+// import movieData from '../Data/data';
+//import apiCalls from './api.js'
 import './App.css';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      movies: movieData.movies,
+      movies: [],
+      // movies: movieData.movies,
       moviePoster: false,
-      details: []
+      details: null,
+      error: false
     }
   }
 
-  displayPoster = (event) => {
-    event.preventDefault(); 
-    const movieId = event.target.id;
-    const movieToDisplay = this.state.movies.filter(movie => {
-      return (movie.id === parseInt(movieId));  
-    });
-    let display = true;
-    this.setState({ moviePoster: display, details: movieToDisplay });
+  componentDidMount() {
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/`)
+    .then(data => data.json())
+    .then((moviesData) => {this.setState({movies: moviesData.movies})})
+  .catch(() => this.setState({ error: 'Something went wrong'}));
   }
 
-  closePoster = (event) => {
-    let noDisplay = false;
-    this.setState({ moviePoster: noDisplay, details: [] });
+  
+  checkIfError(response) {
+    if(response.ok) {
+      const currentStatus = response.status
+      this.setState({ error: true })
+      throw new Error(`Uh oh, something went wrong, better luck next time. Error: ${currentStatus}`)
   }
+
+}
+
+displayPoster = (event) => {
+  event.preventDefault();
+  const movieId = event.target.id;
+  const movieToDisplay = this.state.movies.filter(movie => {
+    return (movie.id === parseInt(movieId))
+  });
+  fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
+  .then(data => data.json())
+  .then(
+    (singleMovie) => {
+      this.setState({
+        details: singleMovie.movie, moviePoster: true
+      })
+    })
+  .catch(() => this.setState({ error: 'Something went wrong'}))
+
+ 
+  closePoster = (event) => {
+    event.preventDefault();
+    this.setState({ moviePoster: false, details: [] });
+  }
+}
 
   //may need this - sample data ratings need to be formatted 
   formatRating = (rating) => {
@@ -46,16 +75,21 @@ class App extends Component {
   }
 
   render() {
-    if (!this.state.movies.length) {
-      return <p>Loading movies...</p>
+    if (this.state.moviePoster) {
+      return (
+        <main>
+          < Header />
+          <Poster details={this.state.details} closePoster={this.closePoster} /> 
+        </main>
+      )
     }
-
     return (
       <main className="home">
         < Header />
         <MoviesContainer movieData={this.state.movies} displayPoster={this.displayPoster} moviePoster={this.state.moviePoster} details={this.state.details} formatRating={this.formatRating} formatReleaseDate={this.formatReleaseDate} closePoster={this.closePoster} />
       </main>
     );
+    
   }
 
 }

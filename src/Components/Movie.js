@@ -12,6 +12,21 @@ const Movie = ( {id, title, posterPath, displayPoster} ) => {
 
 }
 
+// class Movie extends React.Component {
+//     handleClick = () => {
+//         this.props.displayPoster(this.props.id)
+//     }
+
+//     render() {
+//         return (
+//         <div onClick={this.handleClick}>
+//             <img src={this.props.poster} className='zoom' alt={this.props.title} />
+//             <h2>{this.props.title}</h2>
+//         </div>
+//         )
+//     }
+// }
+
 export default Movie
 
 Movie.propTypes = {
