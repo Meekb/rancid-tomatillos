@@ -5,7 +5,6 @@ import Poster from './Poster';
 import PropTypes from 'prop-types';
 import movieData from '../Data/data';
 import './App.css';
-
 class App extends Component {
   constructor() {
     super();
@@ -16,7 +15,6 @@ class App extends Component {
       error: false
     }
   }
-
   componentDidMount() {
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/`)
     .then(data => data.json())
@@ -29,7 +27,6 @@ class App extends Component {
   )
   .catch(() => this.setState({ error: 'Something went wrong'}));
 }
-
   displayPoster = (event) => {
     event.preventDefault(); 
     const movieId = event.target.id;
@@ -49,19 +46,16 @@ class App extends Component {
     .catch(() => this.setState({ error: 'Something went wrong'}));    
     // return movieToDisplay
   }
-
   closePoster = (event) => {
     event.preventDefault();
     this.setState({ moviePoster: false, details: [] });
     console.log('CLICKED');
   }
-
   //may need this - sample data ratings need to be formatted 
   formatRating = (rating) => {
     rating = rating.toFixed(2);
     return rating
   }
-
   formatReleaseDate = (date) => {
     console.log(date);
     const month = date.split('-')[1];
@@ -70,63 +64,25 @@ class App extends Component {
     const formattedDate = `${month}-${day}-${year}`;
     return formattedDate;
   }
-
   render() {
-
     if (this.state.moviePoster) {
       return (
         <main>
-
           < Header />
-          <Poster details={this.state.details} closePoster={this.closePoster}/>}
-
+          <Poster details={this.state.details} formatReleaseDate={this.formatReleaseDate} formatRating={this.formatRating} closePoster={this.closePoster}/>
         </main>
       );
     }
-    
     return (
       <main className="home">
-
         < Header />
-        <MoviesContainer movieData={this.state.movies} displayPoster={this.displayPoster} moviePoster={this.state.moviePoster} details={this.state.details} formatRating={this.formatRating} formatReleaseDate={this.formatReleaseDate} closePoster={this.closePoster} />
-        
+        <MoviesContainer movieData={this.state.movies} displayPoster={this.displayPoster} moviePoster={this.state.moviePoster} details={this.state.details}  />
       </main>
     );
-
   }
-  
 }
-
 export default App;
-
 App.propTypes = {
   movies: PropTypes.object,
   moviePoster: PropTypes.bool
-  
-  
-  // if (!!this.state.movies.length) {
-  //   return <p>Loading movies...</p>
-  // }
-  // if (!!this.state.moviePoster) {
-  //   console.log(this.state.details);
-  //   return <Poster 
-  //             details={this.state.details}
-  //           //  key={details.id}
-  //           //  id={details.id}
-  //           //  title={details.title}
-  //           //  posterPath={details.poster_path}
-  //           //  backdropPath={details.backdrop_path}
-  //           //  releaseDate={details.release_date}
-  //           //  overview={details.overview}
-  //           //  averageRating={details.average_rating}
-  //           //  genres={details.genres}
-  //           //  budget={details.budget}
-  //           //  revenue={details.revenue}
-  //           //  runtime={details.runtime}
-  //           //  tagline={details.tagline}
-  //           //  formatRating={formatRating}
-  //           //  formatReleaseDate={formatReleaseDate}
-  //           //  closePoster={closePoster}
-  //           />
-  // }
 }
