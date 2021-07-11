@@ -17,6 +17,7 @@ class App extends Component {
   }
   componentDidMount() {
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/`)
+    // .then(this.checkForError)
     .then(data => data.json())
     .then(
       (moviesData) => {
@@ -25,8 +26,19 @@ class App extends Component {
       });
     },
   )
-  .catch(() => this.setState({ error: 'Something went wrong'}));
+  .catch(this.checkForError);
 }
+
+checkForError = (response) => {
+  if (!response.ok) {
+    const status = response.status;
+    this.setState( {error: true} )
+    throw new Error(`Uh oh, something's not right. Error: ${status}`)
+  } else {
+    return response.json()
+  }
+}
+
   displayPoster = (event) => {
     event.preventDefault(); 
     const movieId = event.target.id;
