@@ -14,13 +14,13 @@ const Poster = ( {details, closePoster, formatRating, formatReleaseDate} ) => {
       <div className='poster-container'>
       <h2 className='poster-title'> {details.title} </h2>
       <h3> {details.tagline} </h3>
-      {/* <p>{genres}</p> */}
-      {/* <p>Rated {formatRating(rating)} PP's</p> */}
+      <p>Genre: {!details.genres ? "unavailable" : details.genres}</p>
+      <p>Avg Rating: {formatRating(rating)} </p>
       <p>Released {formatReleaseDate(releaseDate)}</p>
-      <p>{details.overview}</p>
+      <p>Overview: {!details.overview ? "No overview for this movie!" : details.overview}</p>
       <p>Runtime: {details.runtime} minutes </p>
-      <p>Budget: ${details.budget}</p>
-      <p>Revenue: ${details.revenue}</p>
+      <p>Budget: {!details.budget ? "unavailable" : details.budget}</p>
+      <p>Revenue: {!details.revenue ? "unavailable" : details.revenue}</p>
       <button aria-label='Back To Search' className='back-btn' onClick={closePoster} >Back To Search</button>
       </div>  
     </section>
