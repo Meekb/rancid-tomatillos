@@ -49,26 +49,8 @@ displayPoster = event => {
 } 
  
 
-  // componentDidUpdate(movieId) {
-  //   fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
-  //   .then(response => response.json)
-  //   .then(data => this.setState({details: data.movie, moviePoster: true}))
-  // }
-
-  // displayPoster = (event) => {
-  //   event.preventDefault(); 
-  //   const movieId = event.target.id;
-  //   const movieToDisplay = this.state.movies.filter(movie => {
-  //     return (movie.id === parseInt(movieId));  
-  //   });
-
-  //   this.componentDidUpdate(movieId)
-  //   // let display = true;
-  //   // this.setState({ moviePoster: display, details: movieToDisplay });
-  // }
-
   closePoster = (event) => {
-    let noDisplay = false;
+    event.preventDefault();
     this.setState({ moviePoster: noDisplay, details: [] });
   }
 
@@ -88,8 +70,13 @@ displayPoster = event => {
   }
 
   render() {
-    if (!this.state.movies.length) {
-      return <p>Loading movies...</p>
+    if (this.state.moviePoster) {
+      return (
+        <main>
+          < Header />
+          <Poster details={this.state.details} closePoster={this.closePoster} /> 
+        </main>
+      )
     }
     return (
       <main className="home">
