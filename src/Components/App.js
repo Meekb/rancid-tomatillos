@@ -36,23 +36,28 @@ class App extends Component {
 
 }
 
-displayPoster = event => {
+displayPoster = (event) => {
   event.preventDefault();
   const movieId = event.target.id;
   const movieToDisplay = this.state.movies.filter(movie => {
-    return (movie.id == parseInt(movieId))
-  })
+    return (movie.id === parseInt(movieId))
+  });
   fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
   .then(data => data.json())
-  .then(singleMovie => this.setState({details: singleMovie.movie, moviePoster: true}))
+  .then(
+    (singleMovie) => {
+      this.setState({
+        details: singleMovie.movie, moviePoster: true
+      })
+    })
   .catch(() => this.setState({ error: 'Something went wrong'}))
-} 
- 
 
+ 
   closePoster = (event) => {
     event.preventDefault();
-    this.setState({ moviePoster: noDisplay, details: [] });
+    this.setState({ moviePoster: false, details: [] });
   }
+}
 
   //may need this - sample data ratings need to be formatted 
   formatRating = (rating) => {
