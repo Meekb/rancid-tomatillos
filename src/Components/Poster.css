@@ -1,10 +1,15 @@
 .poster {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   color: black;
   height: 100vh;
   text-align: center;
+}
+
+.cover-image {
+  width: 400px;
+  box-shadow: 8px 8px 2px 2px #4cd0a4;
 }
 
 .poster-container {
