@@ -79,7 +79,7 @@ checkForError = (response) => {
   render() {
     if (this.state.moviePoster) {
       return (
-        <main>
+        <main className="home">
           < Header />
           <Poster details={this.state.details} formatReleaseDate={this.formatReleaseDate} formatRating={this.formatRating} closePoster={this.closePoster}/>
         </main>
