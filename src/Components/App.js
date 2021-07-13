@@ -4,7 +4,9 @@ import Header from './Header'
 import Poster from './Poster';
 import PropTypes from 'prop-types';
 import movieData from '../Data/data';
+import { Route } from 'react-router-dom';
 import './App.css';
+
 class App extends Component {
   constructor() {
     super();
@@ -76,23 +78,39 @@ checkForError = (response) => {
     const formattedDate = `${month}-${day}-${year}`;
     return formattedDate;
   }
+
   render() {
-    if (this.state.moviePoster) {
-      return (
-        <main>
-          < Header />
-          <Poster details={this.state.details} formatReleaseDate={this.formatReleaseDate} formatRating={this.formatRating} closePoster={this.closePoster}/>
-        </main>
-      );
-    }
     return (
-      <main className="home">
-        < Header />
-        <MoviesContainer movieData={this.state.movies} displayPoster={this.displayPoster} moviePoster={this.state.moviePoster} details={this.state.details}  />
+      <main> 
+        <Header />
+        <Route exact path='/' render={() =>{
+            if (!this.state.error) {
+              return <MoviesContainer movieData={this.state.movies} 
+              displayPoster={this.displayPoster} 
+              moviePoster={this.state.moviePoster} 
+              details={this.state.details} 
+               />
+            } 
+            }
+          }
+        />
+        <Route exact path='/:id' render={({match}) => {
+          const id = parseInt(match.params.id);
+          if (this.state.moviePoster) {
+            return <Poster 
+                    details={this.state.details} 
+                    formatReleaseDate={this.formatReleaseDate} 
+                    formatRating={this.formatRating} 
+                    closePoster={this.closePoster} 
+                    id={id}/>
+          } 
+        }}/>
       </main>
-    );
+      )
+    }
   }
-}
+
+
 export default App;
 App.propTypes = {
   movies: PropTypes.object,
