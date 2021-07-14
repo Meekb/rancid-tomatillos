@@ -64,6 +64,10 @@ checkForError = (response) => {
   convertNumForDisplay = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+  displayGenres = (genreArr) => {
+    const allGenres = genreArr.map(genre => genre + " ");
+    return allGenres;
+  }
   //may need this - sample data ratings need to be formatted 
   formatRating = (rating) => {
     rating = rating.toFixed(2);
@@ -81,7 +85,7 @@ checkForError = (response) => {
       return (
         <main className="home">
           < Header />
-          <Poster details={this.state.details} formatReleaseDate={this.formatReleaseDate} formatRating={this.formatRating} closePoster={this.closePoster} convertNumForDisplay={this.convertNumForDisplay} />
+          <Poster details={this.state.details} formatReleaseDate={this.formatReleaseDate} formatRating={this.formatRating} closePoster={this.closePoster} convertNumForDisplay={this.convertNumForDisplay} displayGenres={this.displayGenres} />
         </main>
       );
     }
