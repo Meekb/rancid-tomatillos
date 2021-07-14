@@ -17,13 +17,12 @@ class App extends Component {
   }
   componentDidMount() {
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/`)
-    // .then(this.checkForError)
     .then(data => data.json())
     .then(
       (moviesData) => {
         this.setState({
           movies: moviesData.movies
-      });
+        });
     },
   )
   .catch(this.checkForError);
@@ -42,13 +41,13 @@ checkForError = (response) => {
   displayPoster = (event) => {
     event.preventDefault(); 
     const movieId = event.target.id;
-    const movieToDisplay = this.state.movies.filter(movie => {
+    this.state.movies.filter(movie => {
       return (movie.id === parseInt(movieId));  
     });
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
     .then(data => data.json())
     .then(
-      (singleMovie) => {
+      (singleMovie) => {  
         this.setState({
           moviePoster: true,
           details: singleMovie.movie
@@ -61,7 +60,9 @@ checkForError = (response) => {
   closePoster = (event) => {
     event.preventDefault();
     this.setState({ moviePoster: false, details: [] });
-    console.log('CLICKED');
+  }
+  convertNumForDisplay = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   //may need this - sample data ratings need to be formatted 
   formatRating = (rating) => {
@@ -69,11 +70,10 @@ checkForError = (response) => {
     return rating
   }
   formatReleaseDate = (date) => {
-    console.log(date);
     const month = date.split('-')[1];
     const day = date.split('-')[2];
-    const year = date.split('-')[0];
-    const formattedDate = `${month}-${day}-${year}`;
+    const year = date.split('-')[0];  
+    const formattedDate = `${month}/${day}/${year}`;
     return formattedDate;
   }
   render() {
@@ -81,7 +81,7 @@ checkForError = (response) => {
       return (
         <main className="home">
           < Header />
-          <Poster details={this.state.details} formatReleaseDate={this.formatReleaseDate} formatRating={this.formatRating} closePoster={this.closePoster}/>
+          <Poster details={this.state.details} formatReleaseDate={this.formatReleaseDate} formatRating={this.formatRating} closePoster={this.closePoster} convertNumForDisplay={this.convertNumForDisplay} />
         </main>
       );
     }

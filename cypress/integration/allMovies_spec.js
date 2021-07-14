@@ -2,7 +2,7 @@ describe('All movies Main', () => {
 
   beforeEach(() => {
     cy.visit('http://localhost:3000/')
-  })
+  });
 
   it('Should render a main element to contain all content', () => {
     cy.get('main').should('be.visible')
@@ -20,8 +20,12 @@ describe('All movies Main', () => {
     cy.get('.all-movies section').should('be.visible')
   });
 
+  it('Should render each movie as an image of the movie cover', () => {
+    cy.get('.each-movie').should('be.visible')
+  })
+
   it('Should render a movie title underneath each movie', () => {
-    cy.get('.all-movies section').contains('p')
+    cy.get('.each-movie section').should('have.child', 'image')
   })
 
 

@@ -1,8 +1,10 @@
 import React from 'react';
 import './Poster.css';
-const Poster = ( {details, closePoster, formatRating, formatReleaseDate} ) => {
+const Poster = ( {details, closePoster, convertNumForDisplay, formatRating, formatReleaseDate} ) => {
   let rating = details.average_rating;
   let releaseDate = details.release_date;
+  let budget = details.budget;
+  let revenue = details.revenue;
   return (
     <section   
       className='poster' style={{
@@ -19,8 +21,8 @@ const Poster = ( {details, closePoster, formatRating, formatReleaseDate} ) => {
       <p>Released {formatReleaseDate(releaseDate)}</p>
       <p>Overview: {!details.overview ? "No overview for this movie!" : details.overview}</p>
       <p>Runtime: {details.runtime} minutes </p>
-      <p>Budget: {!details.budget ? "unavailable" : details.budget}</p>
-      <p>Revenue: {!details.revenue ? "unavailable" : details.revenue}</p>
+      <p>Budget: {!details.budget ? "unavailable" : `$${convertNumForDisplay(details.budget)}`}</p>
+      <p>Revenue: {!details.revenue ? "unavailable" : convertNumForDisplay(revenue)}</p>
       <button aria-label='Back To Search' className='back-btn' onClick={closePoster} >Back To Search</button>
       </div>  
     </section>
