@@ -66,7 +66,7 @@ checkForError = (response) => {
   }
   displayGenres = (genreArr) => {
     const allGenres = genreArr.map(genre => genre + " ");
-    return allGenres;
+    return allGenres; 
   }
   //may need this - sample data ratings need to be formatted 
   formatRating = (rating) => {
