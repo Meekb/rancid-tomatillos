@@ -4,7 +4,7 @@ import Header from './Header'
 import Poster from './Poster';
 import PropTypes from 'prop-types';
 import movieData from '../Data/data';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
@@ -83,28 +83,34 @@ checkForError = (response) => {
     return (
       <main> 
         <Header />
+        <Switch>
+          <Route exact path='/:id' render={({match}) => {
+            
+            const id = parseInt(match.params.id);
+            if (this.state.moviePoster) {
+              return <div>
+              <Header />
+              <Poster 
+                      details={this.state.details} 
+                      formatReleaseDate={this.formatReleaseDate} 
+                      formatRating={this.formatRating} 
+                      closePoster={this.closePoster} 
+                      id={id}
+                      />
+              </div>
+            } 
+          }}/>
+        </Switch>
         <Route exact path='/' render={() =>{
-            if (!this.state.error) {
               return <MoviesContainer movieData={this.state.movies} 
               displayPoster={this.displayPoster} 
               moviePoster={this.state.moviePoster} 
               details={this.state.details} 
                />
-            } 
+             
             }
           }
         />
-        <Route exact path='/:id' render={({match}) => {
-          const id = parseInt(match.params.id);
-          if (this.state.moviePoster) {
-            return <Poster 
-                    details={this.state.details} 
-                    formatReleaseDate={this.formatReleaseDate} 
-                    formatRating={this.formatRating} 
-                    closePoster={this.closePoster} 
-                    id={id}/>
-          } 
-        }}/>
       </main>
       )
     }
