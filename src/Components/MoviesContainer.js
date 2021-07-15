@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './MoviesContainer.css';
 const MoviesContainer = ( {movieData, displayPoster} ) => {
   const allMovies = movieData.map(movie => {
-    return (
+    return (  
         <Movie 
           key={movie.id}
           id={movie.id}

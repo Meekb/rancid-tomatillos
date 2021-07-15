@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import MoviesContainer from "./MoviesContainer";
 import Header from './Header'
 import Poster from './Poster';
-import Movie from "./Movie";
 import PropTypes from 'prop-types';
 import movieData from '../Data/data';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
@@ -45,9 +44,10 @@ class App extends Component {
     event.preventDefault(); 
     const movieId = parseInt(event.target.id);
     console.log(movieId);
-    this.state.movies.filter(movie => {
+    let found = this.state.movies.filter(movie => {
       return (movie.id === parseInt(movieId));  
     });
+    console.log('found', found)
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
     .then(data => data.json())
     .then(
@@ -56,11 +56,10 @@ class App extends Component {
           moviePoster: true,
           details: singleMovie.movie
         })
-        console.log(this.state.moviePoster, this.state.details);
+        console.log('STATE:', this.state.moviePoster, this.state.details);
       }
     )
     .catch(() => this.setState({ error: 'Something went wrong'}));    
-    // return movieToDisplay
   }
   closePoster = (event) => {
     event.preventDefault();
@@ -90,6 +89,7 @@ class App extends Component {
     return (
     <main> 
       <Header />
+
       {!this.state.moviePoster &&
         <Route path='/' render={() =>{
           return <MoviesContainer movieData={this.state.movies} details={this.state.details} displayPoster={this.displayPoster} />  
@@ -99,8 +99,9 @@ class App extends Component {
 
       {this.state.moviePoster && 
         <Route path='/movies/:id' render={({match}) => {
-          const { id } = match.params 
-          return <Poster details={this.state.details} closePoster={this.closePoster} convertNumForDisplay={this.convertNumForDisplay} displayGenres={this.displayGenres} formatRating={this.formatRating} formatReleaseDate={this.formatReleaseDate}  />
+          const { id } = match.params
+          console.log('match parems id', id); 
+          return <Poster details={this.state.details} closePoster={this.closePoster} convertNumForDisplay={this.convertNumForDisplay} displayGenres={this.displayGenres} formatRating={this.formatRating} formatReleaseDate={this.formatReleaseDate} id={id}  />
         }}
         />
       }
@@ -119,22 +120,3 @@ App.propTypes = {
 };
 
 
-{/* <Route exact path='/:id' render={({match}) => {
-      
-  const id = parseInt(match.params.id);
-  
-  if (this.state.moviePoster) {
-    return (
-    <div>
-      <Header />
-      <Poster 
-        details={this.state.details} 
-        formatReleaseDate={this.formatReleaseDate} 
-        formatRating={this.formatRating} 
-        closePoster={this.closePoster} 
-        id={id}
-      />
-    </div>
-    );
-  } 
-}}/> */}
