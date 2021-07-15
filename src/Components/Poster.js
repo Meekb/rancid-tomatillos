@@ -1,5 +1,7 @@
 import React from 'react';
 import './Poster.css';
+import { NavLink } from 'react-router-dom';
+
 const Poster = ( {details, closePoster, convertNumForDisplay, displayGenres, formatRating, formatReleaseDate} ) => {
   let rating = details.average_rating;
   let releaseDate = details.release_date;
@@ -27,9 +29,12 @@ const Poster = ( {details, closePoster, convertNumForDisplay, displayGenres, for
         <p className='budget'>Budget: {!details.budget ? "unavailable" : `$${convertNumForDisplay(budget)}`}</p>
         <p className='revenue'>Revenue: {!details.revenue ? "unavailable" : `$${convertNumForDisplay(revenue)}`}</p>
       </div>
+
+      <NavLink to='/'>
       <div className='button'>
         <button aria-label='Back To Search' className='back-btn' onClick={closePoster} >Back To Search</button>
       </div>
+      </NavLink>
       </div>  
     </section>
   );  
