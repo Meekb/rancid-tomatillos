@@ -1,7 +1,5 @@
 import React from 'react';
 import './Poster.css';
-
-
 const Poster = ( {details, closePoster, convertNumForDisplay, displayGenres, formatRating, formatReleaseDate} ) => {
   let rating = details.average_rating;
   let releaseDate = details.release_date;
@@ -36,5 +34,4 @@ const Poster = ( {details, closePoster, convertNumForDisplay, displayGenres, for
     </section>
   );  
 }
-
 export default Poster;

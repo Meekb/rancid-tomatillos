@@ -17,7 +17,6 @@ const MoviesContainer = ( {movieData, displayPoster} ) => {
         />
       )
     });
-  
   return (
     <section className='all-movies'> 
       {allMovies}

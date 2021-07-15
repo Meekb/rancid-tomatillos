@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import movieData from '../Data/data';
 import { Route } from 'react-router-dom';
 import './App.css';
-
 class App extends Component {
   constructor() {
     super();
@@ -29,7 +28,6 @@ class App extends Component {
   )
   .catch(this.checkForError);
 }
-
   checkForError = (response) => {
     if (!response.ok) {
       const status = response.status;
@@ -39,18 +37,7 @@ class App extends Component {
       return response.json()
   }
 }
-
-// displayChosenCard = (id) => {
-//   const isMovieID = this.state.movies.find(movie => movie.id === id);
-//   return isMovieID ? (
-//     <Poster id={id} />
-//   ) : (
-//     <Redirect to='/'/>
-//   )
-// }
-
-  displayPoster = (event) => {
-    event.preventDefault(); 
+  displayPoster = (event) => { 
     const movieId = parseInt(event.target.id);
     console.log(movieId);
     let found = this.state.movies.filter(movie => {
@@ -71,7 +58,7 @@ class App extends Component {
     .catch(() => this.setState({ error: 'Something went wrong'}));    
   }
   closePoster = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     this.setState({ moviePoster: false, details: [] });
   }
   convertNumForDisplay = (number) => {
@@ -93,19 +80,16 @@ class App extends Component {
     const formattedDate = `${month}/${day}/${year}`;
     return formattedDate;
   }
-
   render() {
     return (
     <main> 
       <Header />
-
       {!this.state.moviePoster &&
         <Route path='/' render={() =>{
           return <MoviesContainer movieData={this.state.movies} details={this.state.details} displayPoster={this.displayPoster} />  
         }}
         />
       }
-
       {this.state.moviePoster && 
         <Route path='/movies/:id' render={({match}) => {
           const { id } = match.params
@@ -115,21 +99,25 @@ class App extends Component {
         />
       }
     </main>
-
     );
   }
-
 };
-
-
-
-
-
-
 export default App;
 App.propTypes = {
   movies: PropTypes.object,
   moviePoster: PropTypes.bool
 };
 
+
+
+
+
+// displayChosenCard = (id) => {
+//   const isMovieID = this.state.movies.find(movie => movie.id === id);
+//   return isMovieID ? (
+//     <Poster id={id} />
+//   ) : (
+//     <Redirect to='/'/>
+//   )
+// }
 
