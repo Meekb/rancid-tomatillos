@@ -4,7 +4,7 @@ import Header from './Header'
 import Poster from './Poster';
 import PropTypes from 'prop-types';
 import movieData from '../Data/data';
-import { Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
@@ -41,6 +41,15 @@ checkForError = (response) => {
   }
 }
 
+displayChosenCard = (id) => {
+  const isMovieID = this.state.movies.find(movie => movie.id === id);
+  return isMovieID ? (
+    <Poster id={id} />
+  ) : (
+    <Redirect to='/'/>
+  )
+}
+
   displayPoster = (event) => {
     event.preventDefault(); 
     const movieId = event.target.id;
@@ -51,6 +60,7 @@ checkForError = (response) => {
     .then(data => data.json())
     .then(
       (singleMovie) => {
+        console.log('ID', movieId)
         this.setState({
           moviePoster: true,
           details: singleMovie.movie
@@ -80,41 +90,48 @@ checkForError = (response) => {
   }
 
   render() {
-    return (
-      <main> 
-        <Header />
-        <Switch>
-          <Route exact path='/:id' render={({match}) => {
-            
-            const id = parseInt(match.params.id);
-            if (this.state.moviePoster) {
-              return <div>
-              <Header />
-              <Poster 
-                      details={this.state.details} 
-                      formatReleaseDate={this.formatReleaseDate} 
-                      formatRating={this.formatRating} 
-                      closePoster={this.closePoster} 
-                      id={id}
-                      />
-              </div>
-            } 
-          }}/>
-        </Switch>
-        <Route exact path='/' render={() =>{
-              return <MoviesContainer movieData={this.state.movies} 
-              displayPoster={this.displayPoster} 
-              moviePoster={this.state.moviePoster} 
-              details={this.state.details} 
-               />
-             
-            }
-          }
-        />
-      </main>
-      )
-    }
+      if (!this.state.moviePoster) {
+        return (
+          <section className='main-display'>
+            <Header />
+            <main> 
+              {/* <Route exact path="/"  */}
+                {/* render={() => { */}
+                  <MoviesContainer movieData={this.state.movies} 
+                    displayPoster={this.displayPoster} 
+                    moviePoster={this.state.moviePoster} 
+                    details={this.state.details} 
+                  />
+              {/* }}/> */}
+            </main>
+          </section>      
+        ) 
+      } 
+        return (
+          <section className='main-display'>
+            <Header />
+            <main> 
+                <Route path='/movies/:id' render={({ match }) => {
+                  const {id} = match.params
+                  return (
+                    <Poster 
+                    details={this.state.details}
+                    formatReleaseDate={this.formatReleaseDate} 
+                    formatRating={this.formatRating} 
+                    closePoster={this.closePoster} 
+                    /> )
+                }}/>
+               
+            </main>
+          </section>
+        );  
+      }
+  
   }
+
+
+
+
 
 
 export default App;
