@@ -2,7 +2,7 @@ import React from 'react';
 import Movie from './Movie';
 import PropTypes from 'prop-types';
 import './MoviesContainer.css';
-const MoviesContainer = ( {movieData, moviePoster, details, displayPoster, closePoster, formatRating, formatReleaseDate} ) => {
+const MoviesContainer = ( {movieData, displayPoster} ) => {
   const allMovies = movieData.map(movie => {
     return (
         <Movie 
@@ -17,10 +17,11 @@ const MoviesContainer = ( {movieData, moviePoster, details, displayPoster, close
         />
       )
     });
+  
   return (
-      <section className='all-movies'> 
-          {allMovies}
-      </section>
+    <section className='all-movies'> 
+      {allMovies}
+    </section>
   );
 }
 export default MoviesContainer

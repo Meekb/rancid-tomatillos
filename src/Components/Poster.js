@@ -1,5 +1,7 @@
 import React from 'react';
 import './Poster.css';
+
+
 const Poster = ( {details, closePoster, convertNumForDisplay, displayGenres, formatRating, formatReleaseDate} ) => {
   let rating = details.average_rating;
   let releaseDate = details.release_date;
@@ -18,13 +20,11 @@ const Poster = ( {details, closePoster, convertNumForDisplay, displayGenres, for
         <h2 className='poster-title'> {details.title} </h2>
         <p className='tagline'> {details.tagline} </p>
       </div>
-      <div className='top-details'>
+      <div className='details'>
         <p className='genre'>Genres: {!details.genres ? "unavailable" : displayGenres(details.genres)}</p>
         <p className='rating'>Avg Rating: {formatRating(rating)} Putridities</p>
         <p className='released'>Released {formatReleaseDate(releaseDate)}</p>
-      </div>
         <p className='overview'> {!details.overview ? "No overview for this movie!" : details.overview} </p>
-      <div className='bottom-details'>
         <p className='runtime'>Runtime: {details.runtime} minutes </p>
         <p className='budget'>Budget: {!details.budget ? "unavailable" : `$${convertNumForDisplay(budget)}`}</p>
         <p className='revenue'>Revenue: {!details.revenue ? "unavailable" : `$${convertNumForDisplay(revenue)}`}</p>
@@ -36,4 +36,5 @@ const Poster = ( {details, closePoster, convertNumForDisplay, displayGenres, for
     </section>
   );  
 }
+
 export default Poster;

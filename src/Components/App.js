@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MoviesContainer from "./MoviesContainer";
 import Header from './Header'
 import Poster from './Poster';
+import Movie from "./Movie";
 import PropTypes from 'prop-types';
 import movieData from '../Data/data';
 import { Route, Switch } from 'react-router-dom';
@@ -30,30 +31,32 @@ class App extends Component {
   .catch(this.checkForError);
 }
 
-checkForError = (response) => {
-  if (!response.ok) {
-    const status = response.status;
-    this.setState( {error: true} )
-    throw new Error(`Uh oh, something's not right. Error: ${status}`)
-  } else {
-    return response.json()
+  checkForError = (response) => {
+    if (!response.ok) {
+      const status = response.status;
+      this.setState( {error: true} )
+      throw new Error(`Uh oh, something's not right. Error: ${status}`)
+    } else {
+      return response.json()
   }
 }
 
   displayPoster = (event) => {
     event.preventDefault(); 
-    const movieId = event.target.id;
+    const movieId = parseInt(event.target.id);
+    console.log(movieId);
     this.state.movies.filter(movie => {
       return (movie.id === parseInt(movieId));  
     });
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
     .then(data => data.json())
     .then(
-      (singleMovie) => {  
+      (singleMovie) => { 
         this.setState({
           moviePoster: true,
           details: singleMovie.movie
         })
+        console.log(this.state.moviePoster, this.state.details);
       }
     )
     .catch(() => this.setState({ error: 'Something went wrong'}));    
@@ -85,44 +88,53 @@ checkForError = (response) => {
 
   render() {
     return (
-      <main> 
-        <Header />
-        <Switch>
-          <Route exact path='/:id' render={({match}) => {
-            
-            const id = parseInt(match.params.id);
-            if (this.state.moviePoster) {
-              return <div>
-              <Header />
-              <Poster 
-                      details={this.state.details} 
-                      formatReleaseDate={this.formatReleaseDate} 
-                      formatRating={this.formatRating} 
-                      closePoster={this.closePoster} 
-                      id={id}
-                      />
-              </div>
-            } 
-          }}/>
-        </Switch>
-        <Route exact path='/' render={() =>{
-              return <MoviesContainer movieData={this.state.movies} 
-              displayPoster={this.displayPoster} 
-              moviePoster={this.state.moviePoster} 
-              details={this.state.details} 
-               />
-             
-            }
-          }
+    <main> 
+      <Header />
+      {!this.state.moviePoster &&
+        <Route path='/' render={() =>{
+          return <MoviesContainer movieData={this.state.movies} details={this.state.details} displayPoster={this.displayPoster} />  
+        }}
         />
-      </main>
-      )
-    }
+      }
+
+      {this.state.moviePoster && 
+        <Route path='/movies/:id' render={({match}) => {
+          const { id } = match.params 
+          return <Poster details={this.state.details} closePoster={this.closePoster} convertNumForDisplay={this.convertNumForDisplay} displayGenres={this.displayGenres} formatRating={this.formatRating} formatReleaseDate={this.formatReleaseDate}  />
+        }}
+        />
+      }
+    </main>
+
+    );
   }
+
+};
 
 
 export default App;
 App.propTypes = {
   movies: PropTypes.object,
   moviePoster: PropTypes.bool
-}
+};
+
+
+{/* <Route exact path='/:id' render={({match}) => {
+      
+  const id = parseInt(match.params.id);
+  
+  if (this.state.moviePoster) {
+    return (
+    <div>
+      <Header />
+      <Poster 
+        details={this.state.details} 
+        formatReleaseDate={this.formatReleaseDate} 
+        formatRating={this.formatRating} 
+        closePoster={this.closePoster} 
+        id={id}
+      />
+    </div>
+    );
+  } 
+}}/> */}
