@@ -4,7 +4,7 @@ import Header from './Header'
 import Poster from './Poster';
 import PropTypes from 'prop-types';
 import movieData from '../Data/data';
-import apiCalls from './apiCalls'
+import {fetchMovieCollection, fetchOneMovie} from './apiCalls'
 import { Route } from 'react-router-dom';
 import './App.css';
 class App extends Component {
@@ -17,8 +17,17 @@ class App extends Component {
       error: false
     }
   }
+  
   componentDidMount() {
-    apiCalls.fetchMovieCollection()
+    fetchMovieCollection()
+    .then(
+      (moviesData) => {
+        this.setState({
+          movies: moviesData.movies
+        })
+      }
+    )
+    .catch(error => this.setState({error: true}))
   //   fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/`)
   //   .then(data => data.json())
   //   .then(
