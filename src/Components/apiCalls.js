@@ -8,7 +8,7 @@ const fetchMovieCollection = () => {
 const fetchOneMovie = (movieId) => {
     return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
     .then(data => data.json())
-    .then(checkForError)
+    // .then(checkForError)
 }
 
 

@@ -28,26 +28,8 @@ class App extends Component {
       }
     )
     .catch(error => this.setState({error: true}))
-  //   fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/`)
-  //   .then(data => data.json())
-  //   .then(
-  //     (moviesData) => {
-  //       this.setState({
-  //         movies: moviesData.movies
-  //       });
-  //   },
-  // )
-  // .catch(this.checkForError);
 }
-//   checkForError = (response) => {
-//     if (!response.ok) {
-//       const status = response.status;
-//       this.setState( {error: true} )
-//       throw new Error(`Uh oh, something's not right. Error: ${status}`)
-//     } else {
-//       return response.json()
-//   }
-// }
+
   displayPoster = (event) => { 
     const movieId = parseInt(event.target.id);
     console.log(movieId);
@@ -55,6 +37,7 @@ class App extends Component {
       return (movie.id === parseInt(movieId));  
     });
     console.log('found', found)
+    //fetchone movie would go here 
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
     .then(data => data.json())
     .then(
