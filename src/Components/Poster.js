@@ -3,7 +3,6 @@ import './Poster.css';
 import { NavLink } from 'react-router-dom';
 
 const Poster = ({closePoster, convertNumForDisplay, details, displayGenres, formatRating, formatReleaseDate}) => {
-  // console.log('details prop', details);
   if (details) {
     console.log(details);
     details = details.movie;
@@ -42,3 +41,4 @@ const Poster = ({closePoster, convertNumForDisplay, details, displayGenres, form
 }
 
 export default Poster;
+

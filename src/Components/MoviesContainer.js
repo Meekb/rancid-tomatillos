@@ -79,5 +79,5 @@ export default MoviesContainer
 
 MoviesContainer.propTypes = {
   displayed: PropTypes.bool,
-  details: PropTypes.array
+  details: PropTypes.array,
 };

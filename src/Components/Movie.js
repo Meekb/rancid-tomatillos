@@ -15,5 +15,5 @@ const Movie = ( { displayPoster, id, title, posterPath } ) => {
 export default Movie;
 Movie.propTypes = {
     title: PropTypes.string,
-    posterPath: PropTypes.string
+    posterPath: PropTypes.string,
 };

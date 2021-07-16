@@ -37,6 +37,5 @@ export default App;
 
 App.propTypes = {
   movies: PropTypes.array,
-  moviePoster: PropTypes.bool
+  moviePoster: PropTypes.bool,
 };
-
