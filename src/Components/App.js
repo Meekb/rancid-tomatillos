@@ -5,7 +5,7 @@ import Poster from './Poster';
 import PropTypes from 'prop-types';
 import movieData from '../Data/data';
 import {fetchMovieCollection, fetchOneMovie} from './apiCalls'
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 class App extends Component {
   constructor() {
@@ -13,8 +13,8 @@ class App extends Component {
     this.state = {
       movies: movieData.movies,
       moviePoster: false,
-      details: null,
-      error: false
+      // details: null,
+      // error: false
     }
   }
   
@@ -30,52 +30,78 @@ class App extends Component {
     .catch(error => this.setState({error: true}))
 }
 
-  displayPoster = (event) => { 
-    const movieId = parseInt(event.target.id);
-    console.log(movieId);
-    let found = this.state.movies.filter(movie => {
-      return (movie.id === parseInt(movieId));  
-    });
-    console.log('found', found)
-    //fetchone movie would go here 
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
-    .then(data => data.json())
-    .then(
-      (singleMovie) => { 
-        this.setState({
-          moviePoster: true,
-          details: singleMovie.movie
-        })
-        console.log('STATE:', this.state.moviePoster, this.state.details);
-      }
-    )
-    .catch(() => this.setState({ error: 'Something went wrong'}));    
-  }
-  closePoster = (event) => {
-    this.setState({ moviePoster: false, details: [] });
-  }
-  convertNumForDisplay = (number) => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-  displayGenres = (genreArr) => {
-    const allGenres = genreArr.map(genre => genre + " ");
-    return allGenres; 
-  }
-  //may need this - sample data ratings need to be formatted 
-  formatRating = (rating) => {
-    rating = rating.toFixed(2);
-    return rating
-  }
-  formatReleaseDate = (date) => {
-    const month = date.split('-')[1];
-    const day = date.split('-')[2];
-    const year = date.split('-')[0];  
-    const formattedDate = `${month}/${day}/${year}`;
-    return formattedDate;
-  }
+  // displayPoster = (event) => { 
+  //   const movieId = parseInt(event.target.id);
+  //   console.log(movieId);
+  //   let found = this.state.movies.filter(movie => {
+  //     return (movie.id === parseInt(movieId));  
+  //   });
+  //   console.log('found', found)
+  //   //fetchone movie would go here 
+  //   fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
+  //   .then(data => data.json())
+  //   .then(
+  //     (singleMovie) => { 
+  //       this.setState({
+  //         moviePoster: true,
+  //         details: singleMovie.movie
+  //       })
+  //       console.log('STATE:', this.state.moviePoster, this.state.details);
+  //     }
+  //   )
+  //   .catch(() => this.setState({ error: 'Something went wrong'}));    
+  // }
+  // closePoster = (event) => {
+  //   this.setState({ moviePoster: false, details: [] });
+  // }
+  // convertNumForDisplay = (number) => {
+  //   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  // }
+  // displayGenres = (genreArr) => {
+  //   const allGenres = genreArr.map(genre => genre + " ");
+  //   return allGenres; 
+  // }
+  // //may need this - sample data ratings need to be formatted 
+  // formatRating = (rating) => {
+  //   rating = rating.toFixed(2);
+  //   return rating
+  // }
+  // formatReleaseDate = (date) => {
+  //   const month = date.split('-')[1];
+  //   const day = date.split('-')[2];
+  //   const year = date.split('-')[0];  
+  //   const formattedDate = `${month}/${day}/${year}`;
+  //   return formattedDate;
+  // }
   render() {
     return (
-    <main> 
+      <main>
+        <Header />
+          <Switch>
+            <Route exact path='/'> 
+             <MoviesContainer movieData={this.state.movies} />
+            </Route>
+            <Route
+              path='movies/:id' render={({ match }) => {
+                const { id } = match.params
+                return <Poster movieID={id} className="all-movies" />
+              }}
+            />
+          </Switch>
+      </main>
+    )
+  }
+};
+
+export default App;
+
+App.propTypes = {
+  movies: PropTypes.object,
+  moviePoster: PropTypes.bool
+};
+
+
+{/* <main> 
       <Header />
       {!this.state.moviePoster &&
         <Route path='/' render={() =>{
@@ -92,17 +118,7 @@ class App extends Component {
         />
       }
     </main>
-    );
-  }
-};
-export default App;
-App.propTypes = {
-  movies: PropTypes.object,
-  moviePoster: PropTypes.bool
-};
-
-
-
+    ); */}
 
 
 // displayChosenCard = (id) => {
