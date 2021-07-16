@@ -22,7 +22,20 @@ class Poster extends React.Component {
     })
     .catch((error) => this.setState({error: `${error}`}))
   }
+
+  formatRating = (rating) => {
+    rating = rating.toFixed(2);
+    return rating
+  }
   
+  formatReleaseDate = (date) => {
+    const month = date.split('-')[1];
+    const day = date.split('-')[2];
+    const year = date.split('-')[0];  
+    const formattedDate = `${month}/${day}/${year}`;
+    return formattedDate;
+  }
+
 }
 
 // const Poster = ( {details, closePoster, convertNumForDisplay, displayGenres, formatRating, formatReleaseDate} ) => {
