@@ -4,6 +4,7 @@ import Header from './Header'
 import Poster from './Poster';
 import PropTypes from 'prop-types';
 import movieData from '../Data/data';
+import apiCalls from './apiCalls'
 import { Route } from 'react-router-dom';
 import './App.css';
 class App extends Component {
@@ -17,26 +18,27 @@ class App extends Component {
     }
   }
   componentDidMount() {
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/`)
-    .then(data => data.json())
-    .then(
-      (moviesData) => {
-        this.setState({
-          movies: moviesData.movies
-        });
-    },
-  )
-  .catch(this.checkForError);
+    apiCalls.fetchMovieCollection()
+  //   fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/`)
+  //   .then(data => data.json())
+  //   .then(
+  //     (moviesData) => {
+  //       this.setState({
+  //         movies: moviesData.movies
+  //       });
+  //   },
+  // )
+  // .catch(this.checkForError);
 }
-  checkForError = (response) => {
-    if (!response.ok) {
-      const status = response.status;
-      this.setState( {error: true} )
-      throw new Error(`Uh oh, something's not right. Error: ${status}`)
-    } else {
-      return response.json()
-  }
-}
+//   checkForError = (response) => {
+//     if (!response.ok) {
+//       const status = response.status;
+//       this.setState( {error: true} )
+//       throw new Error(`Uh oh, something's not right. Error: ${status}`)
+//     } else {
+//       return response.json()
+//   }
+// }
   displayPoster = (event) => { 
     const movieId = parseInt(event.target.id);
     console.log(movieId);
@@ -58,7 +60,6 @@ class App extends Component {
     .catch(() => this.setState({ error: 'Something went wrong'}));    
   }
   closePoster = (event) => {
-    // event.preventDefault();
     this.setState({ moviePoster: false, details: [] });
   }
   convertNumForDisplay = (number) => {
