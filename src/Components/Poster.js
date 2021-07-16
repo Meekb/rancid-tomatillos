@@ -27,13 +27,33 @@ class Poster extends React.Component {
     rating = rating.toFixed(2);
     return rating
   }
-  
+
   formatReleaseDate = (date) => {
     const month = date.split('-')[1];
     const day = date.split('-')[2];
     const year = date.split('-')[0];  
     const formattedDate = `${month}/${day}/${year}`;
     return formattedDate;
+  }
+
+  styleBackground = (backdrop) => {
+    const style = {
+              backgroundImage: `url(${details.backdrop_path})`,
+              backgroundRepeat: 'no-repeat',
+              size: 'cover'
+    }
+  }
+
+  render() {
+    const { backdrop_path, poster_path, id, title, average_rating, release_date, tagline, overview, genres, runtime }
+    return (
+      <section>
+        {!this.state.details && !this.state.error &&
+          <h2 className='loadpage'>Loading moving...🍿</h2>
+        }
+        {!this.state.error && this.state.details}
+      </section>
+    )
   }
 
 }
