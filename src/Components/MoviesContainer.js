@@ -13,7 +13,7 @@ const MoviesContainer = ( {movieData, displayPoster} ) => {
           releaseDate={movie.release_date}
           backdropPath={movie.backdrop_path}
           posterPath={movie.poster_path}
-          displayPoster={displayPoster}            
+          // displayPoster={displayPoster}            
         />
       )
     });
