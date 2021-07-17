@@ -57,11 +57,10 @@ class Poster extends React.Component {
   render() {
     console.log('here')
     console.log(!!this.state.details)
-    const { backdrop_path, poster_path, id, title, average_rating, release_date, tagline, overview, genres, runtime, displayGenres, formatRating, formatReleaseDate, convertNumForDisplay, revenue, budget, } = this.state.details
+    const { backdrop_path, poster_path, id, title, average_rating, release_date, tagline, overview, genres, runtime, revenue, budget, } = this.state.details
     if (this.state.details.title) {
     return (
       <section>
-        {!this.state.details && console.log('this the issue')}
         {!this.state.details && !this.state.error &&
           <h2 className='loadpage'>Loading movie...🍿</h2>
         }
@@ -79,8 +78,8 @@ class Poster extends React.Component {
                  <p className='released'>Released {this.formatReleaseDate(release_date)}</p>
                  <p className='overview'> {!overview ? "No overview for this movie!" : overview} </p>
                  <p className='runtime'>Runtime: {runtime} minutes </p>
-                 <p className='budget'>Budget: {!budget ? "unavailable" : `$${this.convertNumForDisplay(budget)}`}</p>
-                 <p className='revenue'>Revenue: {!revenue ? "unavailable" : `$${this.convertNumForDisplay(revenue)}`}</p>
+                 <p className='budget'>Budget: {!budget ? "unavailable" : `$${budget}`}</p>
+                 <p className='revenue'>Revenue: {!revenue ? "unavailable" : `$${revenue}`}</p>
                </div>
           </div>
           </div>
@@ -88,6 +87,7 @@ class Poster extends React.Component {
         <NavLink to='/'>
         <div className='button'>
           <button aria-label='Back To Search' className='back-btn' >Back To Search</button>
+          {console.log(this.state.details)}
         </div>
         </NavLink>
       </section>
@@ -99,43 +99,3 @@ class Poster extends React.Component {
 }
 
 export default Poster;
-
-/* const Poster = ( {details, closePoster, convertNumForDisplay, displayGenres, formatRating, formatReleaseDate} ) => {
-  let rating = details.average_rating;
-  let releaseDate = details.release_date;
-  let budget = details.budget;
-  let revenue = details.revenue;
-  return (
-    <section   
-      className='poster' style={{
-      backgroundImage: `url(${details.backdrop_path})`,
-      backgroundRepeat: 'no-repeat',
-      size: 'cover'
-    }}>
-      <img src={details.poster_path} className='cover-image' alt={details.title} id={details.id}/>
-      <div className='poster-container'>
-      <div className='title-tag'>
-        <h2 className='poster-title'> {details.title} </h2>
-        <p className='tagline'> {details.tagline} </p>
-      </div>
-      <div className='details'>
-        <p className='genre'>Genres: {!details.genres ? "unavailable" : displayGenres(details.genres)}</p>
-        <p className='rating'>Avg Rating: {formatRating(rating)} Putridities</p>
-        <p className='released'>Released {formatReleaseDate(releaseDate)}</p>
-        <p className='overview'> {!details.overview ? "No overview for this movie!" : details.overview} </p>
-        <p className='runtime'>Runtime: {details.runtime} minutes </p>
-        <p className='budget'>Budget: {!details.budget ? "unavailable" : `$${convertNumForDisplay(budget)}`}</p>
-        <p className='revenue'>Revenue: {!details.revenue ? "unavailable" : `$${convertNumForDisplay(revenue)}`}</p>
-      </div>
-
-      <NavLink to='/'>
-      <div className='button'>
-        <button aria-label='Back To Search' className='back-btn' onClick={closePoster} >Back To Search</button>
-      </div>
-      </NavLink>
-      </div>  
-    </section>
-  );  
-} */
-
-// onClick={closePoster}
