@@ -1,14 +1,14 @@
 const fetchMovieCollection = () => {
     return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/`)
-    .then(data => data.json())
+    // .then(data => data.json())
     .then(checkForError)
     // .catch(this.checkForError)
 }
 
 const fetchOneMovie = (movieId) => {
     return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
-    .then(data => data.json())
-    // .then(checkForError)
+    // .then(data => data.json())
+    .then(checkForError)
 }
 
 

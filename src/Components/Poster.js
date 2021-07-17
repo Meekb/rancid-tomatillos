@@ -8,7 +8,7 @@ class Poster extends React.Component {
     super()
     this.state = {
       id: movieId,
-      details: '',
+      details: {},
       moviePoster: false,
       error: ''
       
@@ -16,16 +16,19 @@ class Poster extends React.Component {
   }
 
   componentDidMount() {
+    console.log('ID', this.state.id)
     fetchOneMovie(this.state.id)
     .then(singleMovie => {
-      this.setState({details: singleMovie.movie })
+      this.setState({
+        details: singleMovie.movie,
+        moviePoster: true })
     })
     .catch((error) => this.setState({error: `${error}`}))
   }
 
   formatRating = (rating) => {
-    rating = rating.toFixed(2);
-    return rating
+    const fixedRating = rating.toFixed(2);
+    return fixedRating
   }
 
   formatReleaseDate = (date) => {
@@ -43,6 +46,7 @@ class Poster extends React.Component {
               size: 'cover',
               overflow: 'scroll'
     }
+    return style
   }
 
   displayGenres = (genreArr) => {
@@ -51,14 +55,18 @@ class Poster extends React.Component {
   }
 
   render() {
-    const { backdrop_path, poster_path, id, title, average_rating, release_date, tagline, overview, genres, runtime, displayGenres, formatRating, formatReleaseDate, convertNumForDisplay, revenue, budget, closePoster } = this.state.details || {}
+    console.log('here')
+    console.log(!!this.state.details)
+    const { backdrop_path, poster_path, id, title, average_rating, release_date, tagline, overview, genres, runtime, displayGenres, formatRating, formatReleaseDate, convertNumForDisplay, revenue, budget, } = this.state.details
+    if (this.state.details.title) {
     return (
       <section>
+        {!this.state.details && console.log('this the issue')}
         {!this.state.details && !this.state.error &&
           <h2 className='loadpage'>Loading movie...🍿</h2>
         }
         {!this.state.error && this.state.details && 
-          <div style={this.style(backdrop_path)}>
+          <div style={this.styleBackground(backdrop_path)} className='each-movie'>
               <img src={poster_path} className='cover-image' alt={title} id={id}/>
               <div className='poster-container'>
               <div className='title-tag'>
@@ -66,29 +74,33 @@ class Poster extends React.Component {
                  <p className='tagline'> {tagline} </p>
                </div>
                <div className='details'>
-                 <p className='genre'>Genres: {!genres ? "unavailable" : displayGenres(genres)}</p>
-                 <p className='rating'>Avg Rating: {formatRating(average_rating)} Putridities</p>
-                 <p className='released'>Released {formatReleaseDate(release_date)}</p>
+                 <p className='genre'>Genres: {!genres ? "unavailable" : this.displayGenres(genres)}</p>
+                 <p className='rating'>Avg Rating: {this.formatRating(average_rating)} Putridities</p>
+                 <p className='released'>Released {this.formatReleaseDate(release_date)}</p>
                  <p className='overview'> {!overview ? "No overview for this movie!" : overview} </p>
                  <p className='runtime'>Runtime: {runtime} minutes </p>
-                 <p className='budget'>Budget: {!budget ? "unavailable" : `$${convertNumForDisplay(budget)}`}</p>
-                 <p className='revenue'>Revenue: {!revenue ? "unavailable" : `$${convertNumForDisplay(revenue)}`}</p>
+                 <p className='budget'>Budget: {!budget ? "unavailable" : `$${this.convertNumForDisplay(budget)}`}</p>
+                 <p className='revenue'>Revenue: {!revenue ? "unavailable" : `$${this.convertNumForDisplay(revenue)}`}</p>
                </div>
           </div>
           </div>
         }
         <NavLink to='/'>
         <div className='button'>
-          <button aria-label='Back To Search' className='back-btn' onClick={closePoster} >Back To Search</button>
+          <button aria-label='Back To Search' className='back-btn' >Back To Search</button>
         </div>
         </NavLink>
       </section>
     )
   }
+  return null
+}
 
 }
 
-{/* const Poster = ( {details, closePoster, convertNumForDisplay, displayGenres, formatRating, formatReleaseDate} ) => {
+export default Poster;
+
+/* const Poster = ( {details, closePoster, convertNumForDisplay, displayGenres, formatRating, formatReleaseDate} ) => {
   let rating = details.average_rating;
   let releaseDate = details.release_date;
   let budget = details.budget;
@@ -124,5 +136,6 @@ class Poster extends React.Component {
       </div>  
     </section>
   );  
-} */}
-export default Poster;
+} */
+
+// onClick={closePoster}
