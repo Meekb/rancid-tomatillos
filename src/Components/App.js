@@ -14,8 +14,6 @@ class App extends Component {
     this.state = {
       movies: movieData.movies,
       moviePoster: false,
-      // details: null,
-      // error: false
     }
   }
   
@@ -38,9 +36,8 @@ class App extends Component {
         <Header />
           <Switch>
             <Route
-                path='/movies/:id' render={({ match }) => {
+                path='/:id' render={({ match }) => {
                  const { id } = match.params
-                 console.log(id)
                 return <Poster movieId={id}/>
               }}
               />
@@ -61,39 +58,3 @@ App.propTypes = {
   movies: PropTypes.object,
   moviePoster: PropTypes.bool
 };
-
-
-/* <main> 
-      <Header />
-      {!this.state.moviePoster &&
-        <Route path='/' render={() =>{
-          return <MoviesContainer movieData={this.state.movies} details={this.state.details} displayPoster={this.displayPoster} />  
-        }}
-        />
-      }
-      {this.state.moviePoster && 
-        <Route path='/movies/:id' render={({match}) => {
-          const { id } = match.params
-          console.log('match parems id', id); 
-          return <Poster details={this.state.details} closePoster={this.closePoster} convertNumForDisplay={this.convertNumForDisplay} displayGenres={this.displayGenres} formatRating={this.formatRating} formatReleaseDate={this.formatReleaseDate} id={id}  />
-        }}
-        />
-      }
-    </main>
-    ); */
-
-
-// displayChosenCard = (id) => {
-//   const isMovieID = this.state.movies.find(movie => movie.id === id);
-//   return isMovieID ? (
-//     <Poster id={id} />
-//   ) : (
-//     <Redirect to='/'/>
-//   )
-// }
-
-
-/* <Route path='/movies/:notFound' render={() => {
-  return <Error type='404'/>
- }} 
-  /> */

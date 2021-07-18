@@ -1,31 +1,12 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-
-// const Error = ({ errorType, log }) => {
-//     return (
-//         <div>
-//             <h1> { errorType } Level Error</h1>
-//             {errorType === '500' && <h2> D'oh! Our Server is experiencing issues. Try again soon.</h2>}
-//             <NavLink to='/'>
-//             <div>
-//                 {errorType !== '500' && 
-//                 <div>
-//                 <h2>Hmm, something isn't right.</h2>
-//                 <button aria-label="Back to Home">Back to</button>
-//                 </div>
-//                 }
-//             </div> 
-//             </NavLink>
-//             {log && <h3>{log}</h3>}
-//         </div>
-//     )
-// }
+import './Error.css'
 
 const Error = () => {
     return (
-        <div>
-            <h1> 404 - Not Found!! 🎭</h1>
-            <NavLink className='' to='/'>
+        <div className='error'>
+            <h2> 404 - Not Found!! 🎭</h2>
+            <NavLink className='go-back' to='/'>
                 Go Back
             </NavLink>
         </div>
@@ -33,9 +14,3 @@ const Error = () => {
 }
 
 export default Error
-
-/* <NavLink to='/'>
-        <div className='button'>
-          <button aria-label='Back To Search' className='back-btn' >Back To Search</button>
-          {console.log(this.state.details)}
-        </div> */
