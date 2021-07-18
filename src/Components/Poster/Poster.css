@@ -7,6 +7,10 @@
   height: 100vh;
   text-align: center;
   border-radius: 15px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .each-movie {
@@ -58,6 +62,7 @@
 .poster-title {
   font-size: 40px;
   font-weight: bold;
+  color: black;
 }
 
 .tagline {

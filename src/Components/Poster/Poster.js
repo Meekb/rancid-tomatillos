@@ -82,12 +82,12 @@ class Poster extends React.Component {
                  <p className='budget'>Budget: {!budget ? "unavailable" : `$${this.convertNumForDisplay(budget)}`}</p>
                  <p className='revenue'>Revenue: {!revenue ? "unavailable" : `$${this.convertNumForDisplay(revenue)}`}</p>
                </div>
-        <NavLink to='/'>
         <div className='button'>
+        <NavLink to='/'>
           <button aria-label='Back To Search' className='back-btn' >Back To Search</button>
           {console.log(this.state.details)}
-        </div>
         </NavLink>
+        </div>
           </div>
           </div>
         }
