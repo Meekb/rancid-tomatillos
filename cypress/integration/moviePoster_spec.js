@@ -1,10 +1,16 @@
 describe('Single movie poster view', () => {
 
   beforeEach(() => {
+    cy.fixture('posterDetails')
+    .then(movieDetails => {
+      const url = 'https://rancid-tomatillos.herokuapp.com/api/v2/movies'
+      cy.intercept('GET', `${url}/337401`), {
+        statusCode: 201,
+        body: posterDetails
+      }
+    })
     cy.visit('http://localhost:3000/')
-    cy.get('[alt="Mulan"]').click()
-    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/337401' )
-  });
+  }
 
   it('Should render the movie cover', () => {
     

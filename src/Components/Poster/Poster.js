@@ -1,5 +1,6 @@
 import React from 'react';
 import './Poster.css';
+import Trailer from '../Trailer/Trailer';
 import { NavLink } from 'react-router-dom';
 import {fetchOneMovie} from '../apiCalls'
 
@@ -68,6 +69,7 @@ class Poster extends React.Component {
         {!this.state.error && this.state.details && 
           <div style={this.styleBackground(backdrop_path)} className='each-movie'>
               <img src={poster_path} className='cover-image zoom' alt={title} id={id}/>
+              {/* <Trailer  /> */}
               <div className='poster-container'>
               <div className='title-tag'>
                  <h2 className='poster-title'> {title} </h2>

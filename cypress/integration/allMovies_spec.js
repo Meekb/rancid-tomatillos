@@ -11,23 +11,14 @@ describe('All movies Main', () => {
   it('Should render a nav element with containing the app title', () => {
     cy.get('nav').should('be.visible')
       .contains('Putrid Physalis Philadelphica')
-      // .get('main').should('be.visible')
   });
 
-  // will need to test for search bar component once built
-
   it('Should render all movies underneath the logo and search bar', () => {
-    cy.get('.all-movies section').should('be.visible')
+    cy.get('.all-movies').should('be.visible')
   });
 
   it('Should render each movie as an image of the movie cover', () => {
     cy.get('.each-movie').should('be.visible')
   })
-
-  it('Should render a movie title underneath each movie', () => {
-    cy.get('.each-movie section').should('have.child', 'image')
-  })
-
-
 
 });
