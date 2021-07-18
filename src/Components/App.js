@@ -7,14 +7,13 @@ import movieData from '../Data/data';
 import {fetchMovieCollection} from './apiCalls'
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
       movies: movieData.movies,
       moviePoster: false,
-      // details: null,
-      // error: false
     }
   }
   
