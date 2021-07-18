@@ -3,6 +3,7 @@ import MoviesContainer from "./MoviesContainer";
 import Header from './Header'
 import Poster from './Poster';
 import PropTypes from 'prop-types';
+import Error from './Error'
 import movieData from '../Data/data';
 import {fetchMovieCollection} from './apiCalls'
 import { Route, Switch } from 'react-router-dom';
@@ -47,6 +48,7 @@ class App extends Component {
              <MoviesContainer movieData={this.state.movies}
               />
             </Route>
+            <Route component={Error} />
           </Switch>
       </main>
     )
@@ -90,3 +92,8 @@ App.propTypes = {
 //   )
 // }
 
+
+/* <Route path='/movies/:notFound' render={() => {
+  return <Error type='404'/>
+ }} 
+  /> */
