@@ -1,5 +1,5 @@
 import React from 'react';
-import Movie from './Movie';
+import Movie from '../Movie/Movie';
 import PropTypes from 'prop-types';
 import './MoviesContainer.css';
 const MoviesContainer = ( {movieData, displayPoster} ) => {
@@ -13,7 +13,6 @@ const MoviesContainer = ( {movieData, displayPoster} ) => {
           releaseDate={movie.release_date}
           backdropPath={movie.backdrop_path}
           posterPath={movie.poster_path}
-          // displayPoster={displayPoster}            
         />
       )
     });

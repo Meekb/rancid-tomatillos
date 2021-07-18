@@ -1,6 +1,5 @@
 import React from 'react'
-// import PropTypes from 'prop-types';
-import './Movie.css'
+import '../Movie/Movie.css'
 import './Header.css'
 
 const Header = () => {
