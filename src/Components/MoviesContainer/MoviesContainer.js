@@ -2,7 +2,7 @@ import React from 'react';
 import Movie from '../Movie/Movie';
 import PropTypes from 'prop-types';
 import './MoviesContainer.css';
-const MoviesContainer = ( {movieData, displayPoster} ) => {
+const MoviesContainer = ( {movieData} ) => {
   const allMovies = movieData.map(movie => {
     return (  
         <Movie 
