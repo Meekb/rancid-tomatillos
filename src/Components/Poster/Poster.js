@@ -1,5 +1,6 @@
 import React from 'react';
 import './Poster.css';
+import Trailer from '../Trailer/Trailer';
 import { NavLink } from 'react-router-dom';
 import {fetchOneMovie} from '../apiCalls'
 
@@ -26,6 +27,10 @@ class Poster extends React.Component {
     .catch((error) => this.setState({error: `${error}`}))
   }
 
+  convertNumForDisplay = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   formatRating = (rating) => {
     const fixedRating = rating.toFixed(2);
     return fixedRating
@@ -42,9 +47,8 @@ class Poster extends React.Component {
   styleBackground = (backdrop) => {
     const style = {
               backgroundImage: `url(${backdrop})`,
-              backgroundRepeat: 'no-repeat',
-              size: 'cover',
-              overflow: 'scroll'
+              backgroundRepeat: 'no-repeat center center fixed',
+              background: 'cover',
     }
     return style
   }
@@ -55,18 +59,17 @@ class Poster extends React.Component {
   }
 
   render() {
-    console.log('here')
-    console.log(!!this.state.details)
     const { backdrop_path, poster_path, id, title, average_rating, release_date, tagline, overview, genres, runtime, revenue, budget, } = this.state.details
     if (this.state.details.title) {
     return (
-      <section>
+      <section> 
         {!this.state.details && !this.state.error &&
           <h2 className='loadpage'>Loading movie...🍿</h2>
         }
         {!this.state.error && this.state.details && 
           <div style={this.styleBackground(backdrop_path)} className='each-movie'>
-              <img src={poster_path} className='cover-image' alt={title} id={id}/>
+              <img src={poster_path} className='cover-image zoom' alt={title} id={id}/>
+              {/* <Trailer  /> */}
               <div className='poster-container'>
               <div className='title-tag'>
                  <h2 className='poster-title'> {title} </h2>
@@ -78,18 +81,18 @@ class Poster extends React.Component {
                  <p className='released'>Released {this.formatReleaseDate(release_date)}</p>
                  <p className='overview'> {!overview ? "No overview for this movie!" : overview} </p>
                  <p className='runtime'>Runtime: {runtime} minutes </p>
-                 <p className='budget'>Budget: {!budget ? "unavailable" : `$${budget}`}</p>
-                 <p className='revenue'>Revenue: {!revenue ? "unavailable" : `$${revenue}`}</p>
+                 <p className='budget'>Budget: {!budget ? "unavailable" : `$${this.convertNumForDisplay(budget)}`}</p>
+                 <p className='revenue'>Revenue: {!revenue ? "unavailable" : `$${this.convertNumForDisplay(revenue)}`}</p>
                </div>
+        <div className='button'>
+        <NavLink to='/'>
+          <button aria-label='Back To Search' className='back-btn' >Back To Search</button>
+          {console.log(this.state.details)}
+        </NavLink>
+        </div>
           </div>
           </div>
         }
-        <NavLink to='/'>
-        <div className='button'>
-          <button aria-label='Back To Search' className='back-btn' >Back To Search</button>
-          {console.log(this.state.details)}
-        </div>
-        </NavLink>
       </section>
     )
   }

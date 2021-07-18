@@ -8,7 +8,6 @@ const Movie = ( {id, title, posterPath} ) => {
       <div className='each-movie'>
         <Link to={`/${id}`} className='each-movie'>
           <img src={posterPath} className='zoom' alt={title} id={id} />
-          <p>{title}</p>
         </Link>
       </div>  
     )

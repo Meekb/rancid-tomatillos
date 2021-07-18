@@ -1,30 +1,19 @@
-describe('Single movie poster view', () => {
+// import posterDetails from './cypress/fixtures/posterDetails.json'
+
+describe('Poster view flow', () => {
 
   beforeEach(() => {
     cy.visit('http://localhost:3000/')
-    cy.get('[alt="Mulan"]').click()
-    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/337401' )
+    cy.get('img').click()
+    // cy.click('img')
+    cy.stubMoviePoster()
   });
 
-  it('Should render the movie cover', () => {
-    
-  });
-
-  // it('Should render an area that displays the movie details', () => {
-    
-  // });
-
-  // it('Should render details unavailable for any category where details are unavailable', () => {
-
-  // });
-
-  // it('Should display the movie cover next to the movie details', () => {
-
-  // });
-
-  // it('Should render the movie relase date into a MM-DD-YYYY format', () => {
-
-  // });
+  it('Should render the movie poster for Mulan', () => {
+    cy.get('poster-title').contains('Mulan')
+  })
 
 
-});
+})
+
+
