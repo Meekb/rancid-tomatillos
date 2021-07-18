@@ -1,5 +1,5 @@
 import React from 'react';
-import Movie from './Movie';
+import Movie from '../Movie/Movie';
 import PropTypes from 'prop-types';
 import './MoviesContainer.css';
 const MoviesContainer = ( {movieData, displayPoster} ) => {

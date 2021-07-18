@@ -1,5 +1,5 @@
 import React from 'react'
-import './Movie.css'
+import '../Movie/Movie.css'
 import './Header.css'
 
 const Header = () => {
