@@ -1,7 +1,7 @@
 import React from 'react';
 import './Poster.css';
 import { NavLink } from 'react-router-dom';
-import {fetchOneMovie} from './apiCalls'
+import {fetchOneMovie} from '../apiCalls'
 
 class Poster extends React.Component {
   constructor({ movieId }) {
