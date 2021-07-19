@@ -12,7 +12,7 @@ trailer. What's your favorite movie, and how many Putridities would you rate it?
   * `npm i` to install dependencies
   * cd into the repo
   * `npm start` to activate the server
-  * localhost:3000 to view running project
+  * open localhost:3000 in your browser to view the project
   
 #Architecture
   * Built in React 
