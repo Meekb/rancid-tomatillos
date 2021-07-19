@@ -1,61 +1,35 @@
-import React, { Component } from "react";
+import React from "react";
 import MoviesContainer from "../MoviesContainer/MoviesContainer";
 import Header from '../Header/Header'
 import Poster from '../Poster/Poster';
 import PropTypes from 'prop-types';
 import Error from '../Error/Error'
-import movieData from '../../Data/data';
-import {fetchMovieCollection} from '../apiCalls'
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      movies: movieData.movies,
-      moviePoster: false,
-    }
-  }
-  
-  componentDidMount() {
-    fetchMovieCollection()
-    .then(
-      (moviesData) => {
-        this.setState({
-          movies: moviesData.movies
-        })
-      }
-    )
-    .catch(error => console.log({error}))
-}
 
- 
-  render() {
+const App = () => {
     return (
       <main>
         <Header />
           <Switch>
+            <Route exact path='/' component={MoviesContainer} />
             <Route
-                path='/:id' render={({ match }) => {
-                 const { id } = match.params
-                return <Poster movieId={id}/>
-              }}
-              />
-            <Route exact path='/'> 
-             <MoviesContainer movieData={this.state.movies}
-              />
-            </Route>
-            <Route component={Error} />
+                exact path='/movies/:id' render={({ match }) => {
+                  const { id } = match.params
+                  return <Poster movieId={id}/>
+                }}
+              /> 
+              <Route component={Error}/>
           </Switch>
       </main>
     )
-  }
-};
-
-export default App;
-
-App.propTypes = {
-  movies: PropTypes.object,
-  moviePoster: PropTypes.bool
-};
+  };
+  
+  export default App;
+  
+  App.propTypes = {
+    movies: PropTypes.object,
+    moviePoster: PropTypes.bool
+  };
+  
