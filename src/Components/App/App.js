@@ -11,62 +11,27 @@ import './App.css';
 
 
 const App = () => {
-// class App extends Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       movies: movieData.movies,
-//       error: '',
-//       moviePoster: false,
-//     }
-//   }
-  
-//   componentDidMount() {
-//     fetchMovieCollection()
-//     .then(
-//       (moviesData) => {
-//         this.setState({
-//           movies: moviesData.movies
-//         })
-//       }
-//     )
-//     .catch(error => this.setState({error: '😬 uh oh something went wrong'}))
-// }
-
-// newMovieState = (searchResult) => {
-//   if (!searchResult.length) {
-//     this.setState({appError: 'Looks like we don\'t have that one - try another search'})
-//   } else {
-//     this.setState({movies: <MoviesContainer/>, error: ''})
-//   }
-// }
-
- 
-  render() {
     return (
       <main>
         <Header />
           <Switch>
+            <Route exact path='/' component={MoviesContainer} />
             <Route
-                path='/:id' render={({ match }) => {
-                 const { id } = match.params
-                return <Poster movieId={id}/>
-              }}
-              />
-            <Route exact path='/'> 
-             <MoviesContainer movieData={this.state.movies}
-              />
-            </Route>
-            <Route component={Error} />
+                exact path='/movies/:id' render={({ match }) => {
+                  const { id } = match.params
+                  return <Poster movieId={id}/>
+                }}
+              /> 
+              <Route component={Error}/>
           </Switch>
       </main>
     )
-  }
-};
-
-export default App;
-
-App.propTypes = {
-  movies: PropTypes.object,
-  moviePoster: PropTypes.bool
-};
+  };
+  
+  export default App;
+  
+  App.propTypes = {
+    movies: PropTypes.object,
+    moviePoster: PropTypes.bool
+  };
+  

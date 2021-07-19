@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import Movie from '../Movie/Movie';
 import PropTypes from 'prop-types';
+import Poster from '../Poster/Poster'
+import {fetchMovieCollection} from '../apiCalls'
+import Search from '../Search/Search'
 import './MoviesContainer.css';
 
 class MoviesContainer extends Component {
   constructor() {
     super() 
     this.state= {
-      movies: movie,
+      movies: [],
       error: '',
-      moviePoster: true
+      moviePoster: true,
+      searchResult: []
     }
   }
 
@@ -25,8 +29,8 @@ class MoviesContainer extends Component {
     .catch(error => this.setState({error: '😬 uh oh something went wrong'}))
 }
 
-renderAllPosters = (movies) => {
-  const allMovies = movies.map(movie => {
+renderAllPosters = () => {
+  const allMovies = this.state.movies.map(movie => {
     return (  
         <Movie 
           key={movie.id}
@@ -43,20 +47,58 @@ renderAllPosters = (movies) => {
   )
 }
 
+renderSearchResults = () => {
+  const searchedMovies = this.state.searchResult.map(movie => {
+    return (  
+        <Movie 
+          key={movie.id}
+          id={movie.id}
+          title={movie.title}
+          posterPath={movie.poster_path}
+        />
+      )
+    });
+    return (
+      <section>
+        {searchedMovies}
+      </section>
+     
+    )
+}
+
 newMovieState = (searchResult) => {
   if (!searchResult.length) {
     this.setState({error: 'Looks like we don\'t have that one - try another search'})
   } else {
-    this.setState({movies: this.renderAllPosters(searchResult), error: ''})
+    this.setState({searchResult, error: ''})
   }
+}
+
+findMovies = (userSearch) => {
+  console.log(userSearch)
+  let foundMovies = this.state.movies.filter(movie => movie.title.toLowerCase().includes(userSearch))
+  console.log(foundMovies)
+  this.setState({searchResult: foundMovies})
+  this.newMovieState(foundMovies)
+  console.log(this.state)
 }
 
 render() {
   return (
-    <section className='all-movies'>
+    <section>
       {!this.state.movies.length && this.state.error && <h2>500 Error!</h2>}
-      {!this.state.movies.length && !this.state.error && <h2>Loading all movies...</h2>}
-      
+      {/* {!this.state.movies.length && !this.state.error && <h2>Loading all movies...</h2>} */}
+      {this.state.movies ? <Search findMovies={this.findMovies} /> : null}
+      {this.state.movies && this.state.searchResult &&
+      <section>
+        {this.renderSearchResults()}
+        </section>
+        }
+      {!this.state.error && !this.state.searchResult.length &&
+        <section>
+          {this.renderAllPosters()}
+        </section>
+      }
     </section>
   )
 }
@@ -80,7 +122,7 @@ render() {
 //       {allMovies}
 //     </section>
 //   );
-}
+
 
 export default MoviesContainer
 MoviesContainer.propTypes = {

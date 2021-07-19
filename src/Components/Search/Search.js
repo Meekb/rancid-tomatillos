@@ -6,47 +6,45 @@ class Search extends React.Component {
         super(props) 
         this.state = {
             userSearch: '',
-            searchResult: this.props.movies 
+            // searchResult: this.props.movies 
         }
     }
 
     handleChange = e => {
-        e.preventDefault()
-        this.setState({ userSearch: ''})
-        this.setState({userSearch: e.target})
+        // e.preventDefault()
+        // this.setState({ userSearch: ''})
+        // const { input } = e.target.value.toLowerCase()
+        this.setState({userSearch: e.target.value})
     }
 
-    searchInput = e => {
-        this.setState({userSearch: e.target.value.toLowerCase()})
-    }
+    // searchInput = e => {
+    //     this.setState({userSearch: e.target.value.toLowerCase()})
+    // }
 
     clear = () => {
         this.setState({userSearch: ''})
     }
 
-    findMovies = () => {
-        let foundMovies = this.props.movies.filter(movie => movie.title.toLowerCase().includes(this.state.userSearch))
-        this.setState({searchResult: foundMovies})
-        
-    }
+ 
 
-    submit = (e) => {
+    submitQuery = (e) => {
         e.preventDefault();
-        this.findMovies()
+        console.log(this.state.userSearch)
+        this.props.findMovies(this.state.userSearch)
     }
 
     render() {
         return (
-       <form submit={this.submit}>
+       <form>
            <input
            type='text'
            placeholder='Search titles'
            id='search'
            name='search'
            value={this.state.userSearch}
-           onChange={this.handleChange}
+           onChange={e => this.handleChange(e)}
            />
-
+           <button type='submit' onClick={this.submitQuery}>Search</button>
        </form> 
         )
     }
