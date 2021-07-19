@@ -50,5 +50,14 @@ gif
   </tr>
 </table>
   
+#Contributors
   
+Em Orendorff https://github.com/emorendorff
+Beth Meeker https://github.com/Meekb
+  
+Project Managers:
+Kayla Wood https://github.com/kaylaewood
+Scott Ertmer https://github.com/sertmer
+  
+Turing School of Software & Design https://frontend.turing.edu/projects/module-3/rancid-tomatillos-v3.html
   
