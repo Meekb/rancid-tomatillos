@@ -23,14 +23,14 @@ class Poster extends React.Component {
         details: singleMovie.movie,
         moviePoster: true })
     })
-    .catch((error) => this.setState({error: `${error}`})) 
+    .catch((error) => this.setState({error: '😬 uh oh, something went wrong'})) 
 
     fetchVideos(this.state.id)
     .then(videos => {
       this.setState({
         trailer: videos.videos[0] })
     })
-    .catch((error) => this.setState({error: `${error}`}))
+    .catch(error => this.setState({error: '😬 uh oh, something went wrong'}))
   }
 
   convertNumForDisplay = (number) => {

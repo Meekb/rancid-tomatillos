@@ -14,7 +14,7 @@ class App extends Component {
     super();
     this.state = {
       movies: movieData.movies,
-      appError: '',
+      error: '',
       moviePoster: false,
     }
   }
@@ -28,7 +28,7 @@ class App extends Component {
         })
       }
     )
-    .catch(error => console.log({error}))
+    .catch(error => this.setState({error: '😬 uh oh something went wrong'}))
 }
 
 newMovieState = (searchResult) => {
