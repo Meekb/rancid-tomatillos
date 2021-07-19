@@ -69,13 +69,13 @@ trailer. Search component allows users to search for a movie by title. What's yo
           <td> Em Orendorff <a href="https://github.com/emorendorff">GH</td>
     </tr>
     </tr>
- <td><img src="https://avatars.githubusercontent.com/u/78388491?v=4" alt="Em Orendorff avatar"
+ <td><img src="https://avatars.githubusercontent.com/u/77934658?v=4" alt="Em Orendorff avatar"
 width="150" height="auto" /></td>
      <tr>
           <td> Beth Meeker <a href="https://github.com/meekb">GH</td>
       </tr>
       </tr>
-<td><img src="https://avatars.githubusercontent.com/u/73731359?v=4" alt="Beth Meeker avatar"
+<td><img src="https://avatars.githubusercontent.com/u/76264735?v=4" alt="Beth Meeker avatar"
 width="150" height="auto" /></td>
     </tr>
 </table>
