@@ -1,11 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import MoviesContainer from "../MoviesContainer/MoviesContainer";
 import Header from '../Header/Header'
 import Poster from '../Poster/Poster';
 import PropTypes from 'prop-types';
 import Error from '../Error/Error'
-import movieData from '../../Data/data';
-import {fetchMovieCollection} from '../apiCalls'
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
