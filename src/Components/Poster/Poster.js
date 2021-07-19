@@ -69,14 +69,13 @@ class Poster extends React.Component {
     const { backdrop_path, poster_path, id, title, average_rating, release_date, tagline, overview, genres, runtime, revenue, budget, } = this.state.details
     if (this.state.details.title) {
     return (
-      <section> 
+      <section>
         {!this.state.details && !this.state.error &&
           <h2 className='loadpage'>Loading movie...🍿</h2>
         }
         {!this.state.error && this.state.details && 
           <div style={this.styleBackground(backdrop_path)} className='each-movie'>
-            <Trailer  trailer={this.state.trailer} />
-              <img src={poster_path} className='cover-image zoom' alt={title} id={id}/>
+              <img src={poster_path} className='cover-image' alt={title} id={id}/>
               <div className='poster-container'>
               <div className='title-tag'>
                  <h2 className='poster-title'> {title} </h2>
@@ -90,6 +89,7 @@ class Poster extends React.Component {
                  <p className='runtime'>Runtime: {runtime} minutes </p>
                  <p className='budget'>Budget: {!budget ? "unavailable" : `$${this.convertNumForDisplay(budget)}`}</p>
                  <p className='revenue'>Revenue: {!revenue ? "unavailable" : `$${this.convertNumForDisplay(revenue)}`}</p>
+                 <Trailer  trailer={this.state.trailer} />
                </div>
         <div className='button'>
         <NavLink to='/'>

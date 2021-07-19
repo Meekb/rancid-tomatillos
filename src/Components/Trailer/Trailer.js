@@ -7,6 +7,8 @@ const Trailer = ({trailer}) => {
   return (
   <div className='trailer-container'>
     <iframe 
+      width="250"
+      height="150"
       src={`https://www.youtube.com/embed/${key}`}
       frameBorder='0'
       allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
