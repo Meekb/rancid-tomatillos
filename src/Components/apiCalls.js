@@ -8,6 +8,11 @@ const fetchOneMovie = (movieId) => {
     .then(checkForError)
 }
 
+const fetchVideos = (movieId) => {
+    return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}/videos`)
+    .then(checkForError)
+}
+
 
 const checkForError = (response) => {
   if (response.ok) {
@@ -19,4 +24,4 @@ const checkForError = (response) => {
 
 
 
-export { fetchMovieCollection, fetchOneMovie }
+export { fetchMovieCollection, fetchOneMovie, fetchVideos }

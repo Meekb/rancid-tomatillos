@@ -2,22 +2,22 @@ import React from 'react';
 import './Trailer.css';
 import PropTypes from 'prop-types';
 
-const Trailer = ({}) => {
+const Trailer = ({trailer}) => {
+  const key = trailer.key;
+  return (
   <div className='trailer-container'>
     <iframe 
-      width='250px'
-      height='175px'
-      src={`https://www.youtube.com/embed/`}
+      src={`https://www.youtube.com/embed/${key}`}
       frameBorder='0'
       allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
       allowFullScreen
       title='Embedded Youtube'
     />
-
   </div>
+  );
 }
 
-Trailer.PropTypes = {
+Trailer.propTypes = {
   embedId: PropTypes.string.isRequired
 };
 

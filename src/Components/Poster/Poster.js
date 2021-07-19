@@ -2,7 +2,7 @@ import React from 'react';
 import './Poster.css';
 import Trailer from '../Trailer/Trailer';
 import { NavLink } from 'react-router-dom';
-import {fetchOneMovie} from '../apiCalls'
+import {fetchOneMovie, fetchVideos} from '../apiCalls'
 
 class Poster extends React.Component {
   constructor({ movieId }) {
@@ -11,18 +11,24 @@ class Poster extends React.Component {
       id: movieId,
       details: {},
       moviePoster: false,
+      trailer: {},
       error: ''
-      
     }
   }
 
   componentDidMount() {
-    console.log('ID', this.state.id)
     fetchOneMovie(this.state.id)
     .then(singleMovie => {
       this.setState({
         details: singleMovie.movie,
         moviePoster: true })
+    })
+    .catch((error) => this.setState({error: `${error}`})) 
+
+    fetchVideos(this.state.id)
+    .then(videos => {
+      this.setState({
+        trailer: videos.videos[0] })
     })
     .catch((error) => this.setState({error: `${error}`}))
   }
@@ -46,9 +52,9 @@ class Poster extends React.Component {
 
   styleBackground = (backdrop) => {
     const style = {
-              backgroundImage: `url(${backdrop})`,
-              backgroundRepeat: 'no-repeat center center fixed',
-              background: 'cover',
+      backgroundImage: `url(${backdrop})`,
+      backgroundRepeat: 'no-repeat center center fixed',
+      background: 'cover',
     }
     return style
   }
@@ -59,6 +65,7 @@ class Poster extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     const { backdrop_path, poster_path, id, title, average_rating, release_date, tagline, overview, genres, runtime, revenue, budget, } = this.state.details
     if (this.state.details.title) {
     return (
@@ -68,8 +75,8 @@ class Poster extends React.Component {
         }
         {!this.state.error && this.state.details && 
           <div style={this.styleBackground(backdrop_path)} className='each-movie'>
+            <Trailer  trailer={this.state.trailer} />
               <img src={poster_path} className='cover-image zoom' alt={title} id={id}/>
-              {/* <Trailer  /> */}
               <div className='poster-container'>
               <div className='title-tag'>
                  <h2 className='poster-title'> {title} </h2>
