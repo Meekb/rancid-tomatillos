@@ -4,21 +4,22 @@
 
 ## Overview
   What's more Putrid than a really bad movie? Nothing! Putrid Physalis Philadelphica is a React application that stores movie details for users 
-to come and search through. Clicking a movie cover will navigate to details for that title including: runtime, budget, revenue, and the YouTube
-trailer. What's your favorite movie, and how many Putridities would you rate it? Find out by visiting Putrid Physalis Philadelphica.
+to come and search through. Clicking a movie cover will navigate to the details for the title including: runtime, budget, revenue, and the YouTube
+trailer. Search component allows users to search for a movie by title. What's your favorite movie, and how many Putridities would you rate it? Find out by visiting Putrid Physalis Philadelphica.
 
 #Instructions
   * Clone down this repo by copying the SSH key and from your terminal git clone <repo SSH key>
   * `npm i` to install dependencies
   * cd into the repo
   * `npm start` to activate the server
-  * open localhost:3000 in your browser to view the project
+  * Open localhost:3000 in your browser to view the project
+  * Endpoints for the API can be found here: https://frontend.turing.edu/projects/module-3/rancid-tomatillos-v3.html
   
 #Architecture
-  * Built in React 
+  * Built with React 
   * Utilizes React Router for url navigation
-  * Application uses Class and Functional components
-  * fetch API for movie data - endpoints for all movies, single movie details, and movie trailers
+  * Application uses both Class and Functional components
+  * .fetch() API for movie data - endpoints for all movies, single movie details, and movie trailers
   * Testing performed with Cypress
   
 #Walkthrough
@@ -51,13 +52,15 @@ gif
 </table>
   
 #Contributors
+ 
+Front End Turing Mod 3 students:  
+  Em Orendorff https://github.com/emorendorff   
+  Beth Meeker https://github.com/Meekb
   
-Em Orendorff https://github.com/emorendorff
-Beth Meeker https://github.com/Meekb
-  
-Project Managers:
-Kayla Wood https://github.com/kaylaewood
-Scott Ertmer https://github.com/sertmer
+
+Project Managers:  
+  Kayla Wood https://github.com/kaylaewood  
+  Scott Ertmer https://github.com/sertmer
   
 Turing School of Software & Design https://frontend.turing.edu/projects/module-3/rancid-tomatillos-v3.html
   
