@@ -10,6 +10,12 @@ class Search extends React.Component {
         }
     }
 
+    handleChange = e => {
+        e.preventDefault()
+        this.setState({ userSearch: ''})
+        this.setState({userSearch: e.target})
+    }
+
     searchInput = e => {
         this.setState({userSearch: e.target.value.toLowerCase()})
     }
@@ -30,7 +36,19 @@ class Search extends React.Component {
     }
 
     render() {
-        
+        return (
+       <form submit={this.submit}>
+           <input
+           type='text'
+           placeholder='Search titles'
+           id='search'
+           name='search'
+           value={this.state.userSearch}
+           onChange={this.handleChange}
+           />
+
+       </form> 
+        )
     }
 }
 
