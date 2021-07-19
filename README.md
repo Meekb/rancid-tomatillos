@@ -21,8 +21,9 @@ trailer. What's your favorite movie, and how many Putridities would you rate it?
   * fetch API for movie data - endpoints for all movies, single movie details, and movie trailers
   * Testing performed with Cypress
   
+#Walkthrough
+
 gif
-  
   
 gif
   
