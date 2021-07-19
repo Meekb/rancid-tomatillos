@@ -14,6 +14,7 @@ class App extends Component {
     super();
     this.state = {
       movies: movieData.movies,
+      appError: '',
       moviePoster: false,
     }
   }
@@ -28,6 +29,14 @@ class App extends Component {
       }
     )
     .catch(error => console.log({error}))
+}
+
+newMovieState = (searchResult) => {
+  if (!searchResult.length) {
+    this.setState({appError: 'Looks like we don\'t have that one - try another search'})
+  } else {
+    this.setState({movies: <MoviesContainer/>, error: ''})
+  }
 }
 
  
