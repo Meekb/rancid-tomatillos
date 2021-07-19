@@ -9,35 +9,37 @@ import {fetchMovieCollection} from '../apiCalls'
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      movies: movieData.movies,
-      error: '',
-      moviePoster: false,
-    }
-  }
-  
-  componentDidMount() {
-    fetchMovieCollection()
-    .then(
-      (moviesData) => {
-        this.setState({
-          movies: moviesData.movies
-        })
-      }
-    )
-    .catch(error => this.setState({error: '😬 uh oh something went wrong'}))
-}
 
-newMovieState = (searchResult) => {
-  if (!searchResult.length) {
-    this.setState({appError: 'Looks like we don\'t have that one - try another search'})
-  } else {
-    this.setState({movies: <MoviesContainer/>, error: ''})
-  }
-}
+const App = () => {
+// class App extends Component {
+//   constructor() {
+//     super();
+//     this.state = {
+//       movies: movieData.movies,
+//       error: '',
+//       moviePoster: false,
+//     }
+//   }
+  
+//   componentDidMount() {
+//     fetchMovieCollection()
+//     .then(
+//       (moviesData) => {
+//         this.setState({
+//           movies: moviesData.movies
+//         })
+//       }
+//     )
+//     .catch(error => this.setState({error: '😬 uh oh something went wrong'}))
+// }
+
+// newMovieState = (searchResult) => {
+//   if (!searchResult.length) {
+//     this.setState({appError: 'Looks like we don\'t have that one - try another search'})
+//   } else {
+//     this.setState({movies: <MoviesContainer/>, error: ''})
+//   }
+// }
 
  
   render() {

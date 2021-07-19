@@ -23,6 +23,15 @@ class Search extends React.Component {
         this.setState({searchResult: foundMovies})
         
     }
+
+    submit = (e) => {
+        e.preventDefault();
+        this.findMovies()
+    }
+
+    render() {
+        
+    }
 }
 
 export default Search

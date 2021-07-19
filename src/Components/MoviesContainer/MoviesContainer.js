@@ -26,7 +26,7 @@ class MoviesContainer extends Component {
 }
 
 renderAllPosters = (movies) => {
-  const allMovies = movieData.map(movie => {
+  const allMovies = movies.map(movie => {
     return (  
         <Movie 
           key={movie.id}
@@ -45,32 +45,41 @@ renderAllPosters = (movies) => {
 
 newMovieState = (searchResult) => {
   if (!searchResult.length) {
-    this.setState({appError: 'Looks like we don\'t have that one - try another search'})
+    this.setState({error: 'Looks like we don\'t have that one - try another search'})
   } else {
-    this.setState({movies: <MoviesContainer/>, error: ''})
+    this.setState({movies: this.renderAllPosters(searchResult), error: ''})
   }
 }
 
+render() {
+  return (
+    <section className='all-movies'>
+      {!this.state.movies.length && this.state.error && <h2>500 Error!</h2>}
+      {!this.state.movies.length && !this.state.error && <h2>Loading all movies...</h2>}
+      
+    </section>
+  )
+}
 
 }
 
 
-const MoviesContainer = ( {movieData} ) => {
-  const allMovies = movieData.map(movie => {
-    return (  
-        <Movie 
-          key={movie.id}
-          id={movie.id}
-          title={movie.title}
-          posterPath={movie.poster_path}
-        />
-      )
-    });
-  return (
-    <section className='all-movies'> 
-      {allMovies}
-    </section>
-  );
+// const MoviesContainer = ( {movieData} ) => {
+//   const allMovies = movieData.map(movie => {
+//     return (  
+//         <Movie 
+//           key={movie.id}
+//           id={movie.id}
+//           title={movie.title}
+//           posterPath={movie.poster_path}
+//         />
+//       )
+//     });
+//   return (
+//     <section className='all-movies'> 
+//       {allMovies}
+//     </section>
+//   );
 }
 
 export default MoviesContainer
