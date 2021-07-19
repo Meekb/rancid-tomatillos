@@ -57,7 +57,7 @@ renderSearchResults = () => {
       )
     });
     return (
-      <section>
+      <section className='all-movies'>
         {searchedMovies}
       </section>
     )
