@@ -24,14 +24,14 @@ trailer. Search component allows users to search for a movie by title. What's yo
   
 # Walkthrough
 
-![homepage](https://user-images.githubusercontent.com/77934658/126238800-2b8e9131-3825-4ff7-9da4-ed11bb2b9f26.gif)
+![homepage](https://user-images.githubusercontent.com/77934658/126238800-2b8e9131-3825-4ff7-9da4-ed11bb2b9f26.gif)<br>
 -As a user, you will see 40 available movies to select from. By clicking any one of these posters, you will be taken to a page displaying their corresponding details including overviews, trailers and ratings!
  
-![searchcomponent](https://user-images.githubusercontent.com/77934658/126238817-f279d2e9-43bf-4ae1-ad6b-9624c354d253.gif)
+![searchcomponent](https://user-images.githubusercontent.com/77934658/126238817-f279d2e9-43bf-4ae1-ad6b-9624c354d253.gif)<br>
 
 - Users have the ability to search titles using the search bar at the top. If no movies match what a user typed in, proper error handling will show.
   
-![404handing](https://user-images.githubusercontent.com/77934658/126238835-e09bf94c-874e-4b71-a121-1e5c7e0ac6c3.gif)
+![404handing](https://user-images.githubusercontent.com/77934658/126238835-e09bf94c-874e-4b71-a121-1e5c7e0ac6c3.gif)<br>
   
 - Proper error handling for incorrect URL paths are also factored in, utilizing routing and error components. 
 
