@@ -62,6 +62,14 @@ trailer. Search component allows users to search for a movie by title. What's yo
   </tr>
 </table>
   
+# Future Features 
+ 
+  - Deployment using Heroku for easy viewing 
+  - Additional error handling and redirects 
+  - Additional filtering by types (i.e. genre, runtime) 
+  - More Cypress testing 
+  - User login and Express storage 
+  
 # Contributors
  
 <table>
