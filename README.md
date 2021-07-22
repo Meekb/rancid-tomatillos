@@ -33,18 +33,18 @@ trailer. Search component allows users to search for a movie by title. What's yo
   * Refactoring for multiple pages and components
   
 # Walkthrough
-
-![homepage](https://user-images.githubusercontent.com/77934658/126238800-2b8e9131-3825-4ff7-9da4-ed11bb2b9f26.gif)<br>
-- As a user, you will see 40 available movies to select from. By clicking any one of these posters, you will be taken to a page displaying their corresponding details including overviews, trailers and ratings!
- 
-![searchcomponent](https://user-images.githubusercontent.com/77934658/126238817-f279d2e9-43bf-4ae1-ad6b-9624c354d253.gif)<br>
-
-- Users have the ability to search titles using the search bar at the top. If no movies match what a user typed in, proper error handling will show.
   
-![404handing](https://user-images.githubusercontent.com/77934658/126238835-e09bf94c-874e-4b71-a121-1e5c7e0ac6c3.gif)<br>
+- As a user, you will see 40 available movies to select from. By clicking any one of these posters, you will be taken to a page displaying their corresponding details including overviews, trailers and ratings!
+![movie trailer](https://user-images.githubusercontent.com/76264735/126689402-12ee4172-47bd-46cd-88d8-71a3f8e38e26.gif)
+
+- Users can search for movie titles  
+![search](https://user-images.githubusercontent.com/76264735/126689621-60152a46-3081-4614-abbd-61d556624ff1.gif)   
+ 
+- Users have the ability to search titles using the search bar at the top. If no movies match what a user typed in, proper error handling will show.
+![search error](https://user-images.githubusercontent.com/76264735/126690589-08de2249-d8ba-4cf0-8c1e-c7bbb79d7dbc.gif)
   
 - Proper error handling for incorrect URL paths are also factored in, utilizing routing and error components. 
-
+![Screen Shot 2021-07-22 at 12 38 10 PM](https://user-images.githubusercontent.com/76264735/126691602-f3333eb0-cc5c-4a4a-911e-e2ba0a815e66.png)
   
 # Tech Stack
 <table>
