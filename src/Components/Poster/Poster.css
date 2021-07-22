@@ -13,6 +13,11 @@
   background-size: cover;
 }
 
+.trailer {
+  opacity: 100%;
+  background: black;
+}
+
 .each-movie {
   display: flex;
   flex-direction: row;

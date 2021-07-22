@@ -6,20 +6,12 @@ class Search extends React.Component {
         super(props) 
         this.state = {
             userSearch: '',
-            // searchResult: this.props.movies 
         }
     }
 
     handleChange = e => {
-        // e.preventDefault()
-        // this.setState({ userSearch: ''})
-        // const { input } = e.target.value.toLowerCase()
         this.setState({userSearch: e.target.value})
     }
-
-    // searchInput = e => {
-    //     this.setState({userSearch: e.target.value.toLowerCase()})
-    // }
 
     clear = () => {
         this.setState({userSearch: ''})

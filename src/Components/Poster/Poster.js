@@ -89,7 +89,9 @@ class Poster extends React.Component {
                  <p className='runtime'>Runtime: {runtime} minutes </p>
                  <p className='budget'>Budget: {!budget ? "unavailable" : `$${this.convertNumForDisplay(budget)}`}</p>
                  <p className='revenue'>Revenue: {!revenue ? "unavailable" : `$${this.convertNumForDisplay(revenue)}`}</p>
-                 <Trailer  trailer={this.state.trailer} />
+                 <div className='trailer'>
+                  <Trailer  trailer={this.state.trailer} />
+                 </div>
                </div>
         <div className='button'>
         <NavLink to='/'>
