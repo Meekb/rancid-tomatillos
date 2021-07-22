@@ -40,10 +40,10 @@ trailer. Search component allows users to search for a movie by title. What's yo
 - Users can search for movie titles  
 ![search](https://user-images.githubusercontent.com/76264735/126689621-60152a46-3081-4614-abbd-61d556624ff1.gif)   
  
-- Users have the ability to search titles using the search bar at the top. If no movies match what a user typed in, proper error handling will show.
+- If no movies match a user search, proper error handling will show.
 ![search error](https://user-images.githubusercontent.com/76264735/126690589-08de2249-d8ba-4cf0-8c1e-c7bbb79d7dbc.gif)
   
-- Proper error handling for incorrect URL paths are also factored in, utilizing routing and error components. 
+- Incorrect URL paths are also factored in, utilizing routing and error components. 
 ![Screen Shot 2021-07-22 at 12 38 10 PM](https://user-images.githubusercontent.com/76264735/126691602-f3333eb0-cc5c-4a4a-911e-e2ba0a815e66.png)
   
 # Tech Stack
